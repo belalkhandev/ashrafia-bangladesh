@@ -12,6 +12,20 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    
 
+    /**
+     * Default data properties
+     */
+    protected $data = [];
+
+    /**
+     * Default Data set
+     */
+    public function __construct()
+    {   // Default variables
+        $this->data = [
+            'page_title' => 'Anujmane Ashrafia Bangladesh',
+            'page_header' => 'Anujmane Ashrafia Bangladesh',
+        ];
+    }
 }
