@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GeoLocationsController;
 use App\Http\Controllers\Api\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,12 @@ Route::group([
 ], function ($router) {
     $router->post('logout', [UsersController::class, 'logout']);
     $router->post('me', [UsersController::class, 'me']);
+});
+
+Route::group([
+    'middleware'=> 'api',
+], function ($router) {
+    $router->get('divisions', [GeoLocationsController::class, 'divisions']);
+    $router->get('districts', [GeoLocationsController::class, 'districts']);
+    $router->get('upazilas', [GeoLocationsController::class, 'upazilas']);
 });
