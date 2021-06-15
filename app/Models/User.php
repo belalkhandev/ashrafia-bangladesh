@@ -178,5 +178,21 @@ class User extends Authenticatable
         }
     }
 
+    //auto generated userd
+    public function userId()
+    {
+        $last_user = User::where('username', 'LIKE', 'user%')->latest()->first();
+
+        if ($last_user) {
+            $exp = explode('user', $last_user->username);
+
+            $userId = 'user'.$exp+1;
+
+            return $userId;
+
+        }
+        return 'user1';
+    }
+
 
 }
