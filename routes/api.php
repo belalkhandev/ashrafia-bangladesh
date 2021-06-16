@@ -29,6 +29,9 @@ Route::group([
     'middleware'=> 'auth:api',
     'prefix' => 'user'
 ], function ($router) {
+    $router->get('list', [UsersController::class, 'userList']);
+    $router->post('update', [UsersController::class, 'update']);
+    $router->post('role/update', [UsersController::class, 'roleUpdate']);
     $router->post('logout', [UsersController::class, 'logout']);
     $router->post('me', [UsersController::class, 'me']);
 });

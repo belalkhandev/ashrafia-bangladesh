@@ -179,19 +179,24 @@ class User extends Authenticatable
     }
 
     //auto generated userd
-    public function userId()
+    public static function userId()
     {
-        $last_user = User::where('username', 'LIKE', 'user%')->latest()->first();
+        $last_user = User::where('username', 'LIKE', 'user%')->orderBy('id', 'DESC')->first();
 
         if ($last_user) {
-            $exp = explode('user', $last_user->username);
-
-            $userId = 'user'.$exp+1;
+            $exp = explode('user-', $last_user->username);
+            $user_no = $exp[1]+1;
+            $userId = "user-".$user_no;
 
             return $userId;
 
         }
-        return 'user1';
+        return 'user-1';
+    }
+
+    public function mureed()
+    {
+        return $this->hasOne(Mureed::class, 'user_id', 'id');
     }
 
 

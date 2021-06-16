@@ -28,7 +28,7 @@ class CreateMureedsTable extends Migration
             $table->string('place')->nullable();
             $table->string('nid')->unique();
             $table->string('nationality')->nullable();
-            $table->string('prefession')->nullable();
+            $table->string('profession')->nullable();
             $table->string('home_address')->nullable();
             $table->string('telephone_home')->nullable();
             $table->string('mobile')->nullable();
@@ -43,8 +43,11 @@ class CreateMureedsTable extends Migration
             $table->text('remarks')->nullable();
             $table->string('photo')->nullable();
             $table->string('signature')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
-
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

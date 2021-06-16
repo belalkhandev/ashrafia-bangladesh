@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
 
         $user = new User();
         $user->name = "Super admin";
-        $user->username = "superadmin";
+        $user->username = "user-1";
         $user->password = app('hash')->make('123456');
         $user->otp = rand(111111, 999999);
         $user->is_verified = true;
@@ -30,16 +30,16 @@ class UsersTableSeeder extends Seeder
 
         $user = new User();
         $user->name = "Admin";
-        $user->username = "admin";
+        $user->username = "user-2";
         $user->password = app('hash')->make('123456');
         $user->otp = rand(111111, 999999);
         $user->is_verified = true;
         $user->save();
-        $user->attachRole($sadmin);
+        $user->attachRole($admin);
 
         $user = new User();
         $user->name = "Follower";
-        $user->username = "follwer";
+        $user->username = "user-3";
         $user->password = app('hash')->make('123456');
         $user->otp = rand(111111, 999999);
         $user->is_verified = true;
