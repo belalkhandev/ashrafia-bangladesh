@@ -10,6 +10,7 @@ use App\Models\Utility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -335,7 +336,6 @@ class UsersController extends Controller
         }
     }
 
-
     /**
      * update user role
      *
@@ -384,6 +384,62 @@ class UsersController extends Controller
         ]);
 
     }
+
+    /**
+     * update user role
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updatePassword(Request $request)
+    {
+        //set validation rules
+        $rules = [
+            'current_password' => 'required',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required'
+        ];
+
+        $messages = [
+            'password.required' => 'New password required',
+        ];
+
+        //make validation
+        $validation = Validator::make($request->all(), $rules, $messages);
+
+        //check validation
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validation->errors()
+            ], 422);
+        }
+
+        //check current passwwor matched
+        if(!Hash::check($request->get('current_password'), Auth::guard('api')->user()->password)){
+            return response()->json([
+                'status' => false,
+                'message' => 'Current password does not matched'
+            ]);
+        } else {
+            $password = Hash::make($request['password']);
+            $user = $this->guard()->user();
+            $user->password = Hash::make($request['password']);
+
+            if ($user->save()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Password has been changed successfully'
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to change password'
+            ]);
+        }
+
+    }
+
     /**
      * Get the authenticated User
      *

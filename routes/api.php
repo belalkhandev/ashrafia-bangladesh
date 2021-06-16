@@ -32,6 +32,7 @@ Route::group([
     $router->get('list', [UsersController::class, 'userList']);
     $router->post('update', [UsersController::class, 'update']);
     $router->post('role/update', [UsersController::class, 'roleUpdate']);
+    $router->post('change/password', [UsersController::class, 'updatePassword']);
     $router->post('logout', [UsersController::class, 'logout']);
     $router->post('me', [UsersController::class, 'me']);
 });
