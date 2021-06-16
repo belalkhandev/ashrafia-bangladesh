@@ -17,7 +17,28 @@ class UsersController extends Controller
 
     public function userList()
     {
+        if (!$this->guard()->user()->hasRoles(['super_admin', 'admin'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Access denied'
+            ]);
+        }
 
+        $users = User::with('mureed')->where('is_active', 1)->get();
+
+        if ($users->isNotEmpty()) {
+            return response()->json([
+                'status' => true,
+                'user' => $users,
+                'message' => $users->count().' User found'
+            ], 422);
+        }
+
+        return response()->json([
+            'status' => false,
+            'user' => null,
+            'message' => 'No user found'
+        ]);
     }
 
     //user register
@@ -162,7 +183,7 @@ class UsersController extends Controller
         ];
 
         //make validation
-        $validation = Validator::make($request->all(), $rules);
+        $validation = Validator::make($request->all(), $rules, $messages);
 
         //check validation
         if ($validation->fails()) {
