@@ -337,6 +337,54 @@ class UsersController extends Controller
 
 
     /**
+     * update user role
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function roleUpdate(Request $request)
+    {
+        if (!$this->guard()->user()->hasRoles(['super_admin', 'admin'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Access denied'
+            ]);
+        }
+
+        //set validation rules
+        $rules = [
+            'user_id' => 'required',
+            'role_id' => 'required'
+        ];
+
+        $messages = [
+            'user_id.required' => 'User required',
+            'role_id.required' => 'Role required'
+        ];
+
+        //make validation
+        $validation = Validator::make($request->all(), $rules, $messages);
+
+        //check validation
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validation->errors()
+            ], 422);
+        }
+
+        $user = User::find($request->input('user_id'));
+        $user->detachRole($user->role());
+        //attach new role
+        $role = Role::find($request->input('role_id'));
+        $user->attachRole($role);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'User role has been updated'
+        ]);
+
+    }
+    /**
      * Get the authenticated User
      *
      * @return \Illuminate\Http\JsonResponse
