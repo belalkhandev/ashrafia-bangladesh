@@ -35,11 +35,13 @@ Route::group([
     $router->post('change/password', [UsersController::class, 'updatePassword']);
     $router->post('logout', [UsersController::class, 'logout']);
     $router->post('me', [UsersController::class, 'me']);
+    $router->get('role/list', [UsersController::class, 'roleList']);
 });
 
 Route::group([
     'middleware'=> 'api',
 ], function ($router) {
+    $router->get('divisions', [GeoLocationsController::class, 'divisions']);
     $router->get('divisions', [GeoLocationsController::class, 'divisions']);
     $router->get('districts', [GeoLocationsController::class, 'districts']);
     $router->get('upazilas', [GeoLocationsController::class, 'upazilas']);

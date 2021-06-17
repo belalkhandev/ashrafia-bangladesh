@@ -461,6 +461,43 @@ class UsersController extends Controller
         ], 401);
     }
 
+    /**
+     * Get the authenticated User
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function roleList()
+    {
+        if (!$this->guard()->user()->hasRoles(['super_admin', 'admin'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Access denied'
+            ]);
+        }
+
+        if ($this->guard()->user()->hasRole('super_admin')) {
+            $roles = Role::select('id', 'name', 'display_name')->get();
+        }
+
+        if ($this->guard()->user()->hasRole('admin')) {
+            $roles = Role::select('id', 'name', 'display_name')->where('name', '!=', 'super_admin')->get();
+        }
+
+        if ($roles->isNotEmpty()) {
+            return response()->json([
+                'status' => true,
+                'roles' => $roles,
+                'message' => 'Roles found'
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'roles' => null,
+            'message' => 'No roles found'
+        ]);
+    }
+
      /**
      * Log the user out (Invalidate the token)
      *
