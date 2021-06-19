@@ -30,6 +30,7 @@ Route::group([
     'prefix' => 'user'
 ], function ($router) {
     $router->get('list', [UsersController::class, 'userList']);
+    $router->post('show', [UsersController::class, 'userDetailsShow']);
     $router->post('update', [UsersController::class, 'update']);
     $router->post('role/update', [UsersController::class, 'roleUpdate']);
     $router->post('change/password', [UsersController::class, 'updatePassword']);

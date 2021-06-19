@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Ui\Presets\React;
 
 class UsersController extends Controller
 {
@@ -32,7 +33,43 @@ class UsersController extends Controller
                 'status' => true,
                 'user' => $users,
                 'message' => $users->count().' User found'
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'user' => null,
+            'message' => 'No user found'
+        ]);
+    }
+
+    public function userDetailsShow(Request $request)
+    {
+        //set validation rules
+        $rules = [
+            'user_id' => 'required',
+        ];
+
+        //make validation
+        $validation = Validator::make($request->all(), $rules);
+
+        //check validation
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validation->errors()
             ], 422);
+        }
+
+
+        $user = User::with('mureed')->find($request->input('user_id'));
+
+        if ($user) {
+            return response()->json([
+                'status' => true,
+                'user' => $user,
+                'message' => ' User found'
+            ]);
         }
 
         return response()->json([
@@ -52,7 +89,7 @@ class UsersController extends Controller
             'birthdate' => 'required',
             'gender' => 'required',
             'blood_group' => 'required',
-            'nid' => 'required|unique:mureeds,nid',
+            'nid' => 'unique:mureeds,nid',
             'nationality' => 'required',
             'mobile' => 'required',
             'home_address' => 'required',
