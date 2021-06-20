@@ -42,6 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'role'
+    ];
+
     /**
      * Many to many relation between users and roles
      *
@@ -60,6 +64,16 @@ class User extends Authenticatable
     public function role()
     {
         return $this->roles()->first();
+    }
+
+    /**
+     * Get single role to verify permission, as it has a many to many relationship
+     *
+     * @return object|array - user current role that belongs to current user
+     */
+    public function userRole()
+    {
+        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id')->first();
     }
 
     /**
@@ -198,6 +212,16 @@ class User extends Authenticatable
     {
         return $this->hasOne(Mureed::class, 'user_id', 'id');
     }
+    
+    public function getRoleAttribute()
+    {
+        if ($this->role()) {
+            $role = $this->role();
 
+            return $role;
+        }
+
+        return null;
+    }
 
 }

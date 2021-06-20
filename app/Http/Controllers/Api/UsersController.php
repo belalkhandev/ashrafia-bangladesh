@@ -26,7 +26,7 @@ class UsersController extends Controller
             ]);
         }
 
-        $users = User::with('mureed')->where('is_active', 1)->get();
+        $users = User::with('mureed')->where('is_active', 1)->where('id', '!=', $this->guard()->user()->id)->get();
 
         if ($users->isNotEmpty()) {
             return response()->json([
@@ -147,7 +147,7 @@ class UsersController extends Controller
                 $murid->place = $request->input('place');
                 $murid->nid = $request->input('nid');
                 $murid->nationality = $request->input('nationality');
-                $murid->profession = $request->input('prefession');
+                $murid->profession = $request->input('profession');
                 $murid->home_address = $request->input('home_address');
                 $murid->telephone_home = $request->input('telephone_home');
                 $murid->mobile = $request->input('mobile');
@@ -178,16 +178,29 @@ class UsersController extends Controller
 
                 $murid->save();
                 DB::commit();
-                //create token
-                $token = $user->createToken('ashrafia')->accessToken;
-
                 $user->mureed;
+
+                $token = null;
+
+                if ($this->guard()->user()) {
+                    dd($this->guard()->user());
+                }
+
+                if(Auth::guard('api')->check()) {
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Congratulations! User registered successfully',
+                        'user' => $user,
+                    ]);
+                } else {                    
+                    //create token
+                    $token = $user->createToken('ashrafia')->accessToken;
+                }
 
                 return response()->json([
                     'status' => true,
                     'message' => 'You have registered successfully',
                     'user' => $user,
-                    'role' => $user->role()->name,
                     'token' => $token
                 ]);
             }
@@ -244,7 +257,6 @@ class UsersController extends Controller
                 'status' => true,
                 'message' => 'Logged in successfully',
                 'user' => $user,
-                'role' => $user->role()->name,
                 'token' => $token
             ]);
         } else {
@@ -301,6 +313,9 @@ class UsersController extends Controller
         }
 
         try {
+                $user = User::find($request->input('user_id'));
+                $user->name = $request->input('name');
+                $user->save();
                 //udpate murids
                 $murid = Mureed::where('user_id', $request->input('user_id'))->first();
                 $murid->division_id = $request->input('division_id');
@@ -315,7 +330,7 @@ class UsersController extends Controller
                 $murid->place = $request->input('place');
                 $murid->nid = $request->input('nid');
                 $murid->nationality = $request->input('nationality');
-                $murid->profession = $request->input('prefession');
+                $murid->profession = $request->input('profession');
                 $murid->home_address = $request->input('home_address');
                 $murid->telephone_home = $request->input('telephone_home');
                 $murid->mobile = $request->input('mobile');
@@ -356,7 +371,7 @@ class UsersController extends Controller
                     return response()->json([
                         'status' => true,
                         'message' => 'Updated successfully mureed information',
-                        'murid' => $murid,
+                        'mureed' => $murid,
                     ]);
                 }
 
@@ -423,7 +438,7 @@ class UsersController extends Controller
     }
 
     /**
-     * update user role
+     * update user pasword
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -458,7 +473,6 @@ class UsersController extends Controller
                 'message' => 'Current password does not matched'
             ]);
         } else {
-            $password = Hash::make($request['password']);
             $user = $this->guard()->user();
             $user->password = Hash::make($request['password']);
 
@@ -474,6 +488,58 @@ class UsersController extends Controller
                 'message' => 'Failed to change password'
             ]);
         }
+
+    }
+    
+    /**
+     * update user reset password
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function resetPassword(Request $request)
+    {
+        if (!$this->guard()->user()->hasRoles(['super_admin'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Access denied'
+            ]);
+        }
+        //set validation rules
+        $rules = [
+            'user_id' => 'required',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required'
+        ];
+
+        $messages = [
+            'password.required' => 'New password required',
+        ];
+
+        //make validation
+        $validation = Validator::make($request->all(), $rules, $messages);
+
+        //check validation
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validation->errors()
+            ], 422);
+        }
+
+        $user = User::find($request->input('user_id'));
+        $user->password = Hash::make($request['password']);
+
+        if ($user->save()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Password has been changed successfully'
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Failed to change password'
+        ]);
 
     }
 
@@ -533,6 +599,75 @@ class UsersController extends Controller
             'roles' => null,
             'message' => 'No roles found'
         ]);
+    }
+
+    /**
+     * delete user by superadmin
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteUser(Request $request)
+    {
+        if (!$this->guard()->user()->hasRoles(['super_admin'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Access denied'
+            ]);
+        }
+        //set validation rules
+        $rules = [
+            'user_id' => 'required',
+        ];
+
+        //make validation
+        $validation = Validator::make($request->all(), $rules);
+
+        //check validation
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validation->errors()
+            ], 422);
+        }
+
+        $user = User::find($request->input('user_id'));
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Did not find user'
+            ],);
+        }
+
+        // remove image if uplaod
+        $mureed = $user->mureed ? $user->mureed : null;
+
+        $photo = $signature = null;
+        if ($mureed) {
+            $photo = $mureed->photo;
+            $signature = $mureed->photo;
+        }
+
+        if ($user->delete()) {
+            //delete photo 
+            if($photo) {
+                unlink($photo);
+            }
+            //delete 
+            if($signature) {
+                unlink($signature);
+            }
+            return response()->json([
+                'status' => true,
+                'message' => 'Deleted successfully'
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Failed to delete'
+        ]);
+
     }
 
      /**

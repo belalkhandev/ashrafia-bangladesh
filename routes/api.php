@@ -34,9 +34,11 @@ Route::group([
     $router->post('update', [UsersController::class, 'update']);
     $router->post('role/update', [UsersController::class, 'roleUpdate']);
     $router->post('change/password', [UsersController::class, 'updatePassword']);
+    $router->post('reset/password', [UsersController::class, 'resetPassword']);
     $router->post('logout', [UsersController::class, 'logout']);
     $router->post('me', [UsersController::class, 'me']);
     $router->get('role/list', [UsersController::class, 'roleList']);
+    $router->delete('delete', [UsersController::class, 'deleteUser']);
 });
 
 Route::group([
