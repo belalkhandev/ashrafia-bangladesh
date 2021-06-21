@@ -11,6 +11,6 @@ class FrontendController extends Controller
     {
         $data = [];
 
-        return view('frontend.index')->with(array_merge($this->data, $data));
+        return view('index')->with(array_merge($this->data, $data));
     }
 }
