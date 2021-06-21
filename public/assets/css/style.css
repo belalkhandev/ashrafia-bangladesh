@@ -2203,12 +2203,12 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 .btn-primary:focus,
 .btn-primary:active {
     color: #fff;
-    background: #005fee;
-    border-color: #005fee
+    background: #272727;
+    border-color: #1f1f1f
 }
 
 .btn-primary-alt {
-    color: #004ec5;
+    color: #272727;
     background: #c5dcff;
     border: #c5dcff
 }

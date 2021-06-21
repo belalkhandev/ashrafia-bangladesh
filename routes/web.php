@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Web\FrontendController;
+use App\Http\Controllers\Web\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,8 @@ Route::get('logout',  [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', [FrontendController::class, 'index'])->name('fr.home');
 Route::get('/information', [FrontendController::class, 'index'])->name('fr.information');
+Route::get('/register', [UsersController::class, 'register'])->name('fr.register');
+Route::post('/register', [UsersController::class, 'store'])->name('fr.register.store');
 
 
 /*
