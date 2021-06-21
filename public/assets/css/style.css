@@ -12690,7 +12690,7 @@ p+.timeline-content-info {
     line-height: 32px;
     padding: 12px 0;
     position: relative;
-    color: #03B37C
+    color: #707070
 }
 
 .navbar-menu>li>a:before {
@@ -12701,7 +12701,7 @@ p+.timeline-content-info {
     opacity: 0;
     width: 100%;
     content: '';
-    background: #03B37C;
+    background: #707070;
     transition: all .3s
 }
 
@@ -12741,7 +12741,7 @@ p+.timeline-content-info {
     left: 20px;
     width: 6px;
     height: 1px;
-    background: #03B37C;
+    background: #707070;
     content: '';
     top: 19.5px
 }
@@ -12784,7 +12784,7 @@ p+.timeline-content-info {
     height: 2px;
     width: 100%;
     content: '';
-    background: #03B37C
+    background: #707070
 }
 
 .navbar-dropdown .has-dropdown>a:after {
