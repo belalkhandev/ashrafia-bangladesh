@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->rememberToken();
             $table->timestamps();
+            $table->dateTime('deleted_at')->nullable();
+            $table->integer('deleted_by')->nullable();
         });
     }
 

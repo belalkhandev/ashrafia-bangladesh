@@ -47,6 +47,7 @@ class CreateMureedsTable extends Migration
             $table->timestamps();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->dateTime('deleted_at')->nullable();
             $table->integer('deleted_by')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

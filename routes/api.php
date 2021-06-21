@@ -38,7 +38,7 @@ Route::group([
     $router->post('logout', [UsersController::class, 'logout']);
     $router->post('me', [UsersController::class, 'me']);
     $router->get('role/list', [UsersController::class, 'roleList']);
-    $router->delete('delete', [UsersController::class, 'deleteUser']);
+    $router->post('delete', [UsersController::class, 'deleteUser']);
 });
 
 Route::group([

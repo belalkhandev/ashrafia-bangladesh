@@ -7,6 +7,7 @@ use App\Models\Mureed;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Utility;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -88,7 +89,6 @@ class UsersController extends Controller
             'father_name' => 'required',
             'birthdate' => 'required',
             'gender' => 'required',
-            'blood_group' => 'required',
             'nid' => 'unique:mureeds,nid',
             'nationality' => 'required',
             'mobile' => 'required',
@@ -174,7 +174,7 @@ class UsersController extends Controller
                     $murid->signature = $sign_path;
                 }
 
-                $murid->created_by = $user->id;
+                $murid->created_by = Auth::guard('api')->check() ? Auth::guard('api')->user()->id : $user->id;
 
                 $murid->save();
                 DB::commit();
@@ -248,17 +248,23 @@ class UsersController extends Controller
 
         if ($authorized = Auth::guard()->attempt($credentials)) {
             $user = Auth::guard()->user();
-            $token = $user->createToken($authorized)->accessToken;
 
+            if ($user->is_active) {
+                $token = $user->createToken($authorized)->accessToken;    
+                $user->mureed;
 
-            $user->mureed;
-
-            return response()->json([
-                'status' => true,
-                'message' => 'Logged in successfully',
-                'user' => $user,
-                'token' => $token
-            ]);
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Logged in successfully',
+                    'user' => $user,
+                    'token' => $token
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Failed to Login, Invalid credentials',
+                ]);
+            }
         } else {
             return response()->json([
                 'status' => false,
@@ -285,7 +291,6 @@ class UsersController extends Controller
             'father_name' => 'required',
             'birthdate' => 'required',
             'gender' => 'required',
-            'blood_group' => 'required',
             'nationality' => 'required',
             'mobile' => 'required',
             'home_address' => 'required',
@@ -313,67 +318,67 @@ class UsersController extends Controller
         }
 
         try {
-                $user = User::find($request->input('user_id'));
-                $user->name = $request->input('name');
-                $user->save();
-                //udpate murids
-                $murid = Mureed::where('user_id', $request->input('user_id'))->first();
-                $murid->division_id = $request->input('division_id');
-                $murid->district_id = $request->input('district_id');
-                $murid->upazila_id = $request->input('upazila_id');
-                $murid->name = $request->input('name');
-                $murid->father_name = $request->input('father_name');
-                $murid->head_of_family = $request->input('head_of_family');
-                $murid->birthdate = $request->input('birthdate');
-                $murid->gender = $request->input('gender');
-                $murid->blood_group = $request->input('blood_group');
-                $murid->place = $request->input('place');
-                $murid->nid = $request->input('nid');
-                $murid->nationality = $request->input('nationality');
-                $murid->profession = $request->input('profession');
-                $murid->home_address = $request->input('home_address');
-                $murid->telephone_home = $request->input('telephone_home');
-                $murid->mobile = $request->input('mobile');
-                $murid->office_address = $request->input('office_address');
-                $murid->telephone_office = $request->input('telephone_office');
-                $murid->fax = $request->input('fax');
-                $murid->emergency_contact = $request->input('emergency_contact');
-                $murid->emergency_telephone = $request->input('emergency_telephone');
-                $murid->disciple_of = $request->input('disciple_of');
-                $murid->email = $request->input('email');
-                $murid->website = $request->input('website');
-                $murid->remarks = $request->input('remarks');
+            $user = User::find($request->input('user_id'));
+            $user->name = $request->input('name');
+            $user->save();
+            //udpate murids
+            $murid = Mureed::where('user_id', $request->input('user_id'))->first();
+            $murid->division_id = $request->input('division_id');
+            $murid->district_id = $request->input('district_id');
+            $murid->upazila_id = $request->input('upazila_id');
+            $murid->name = $request->input('name');
+            $murid->father_name = $request->input('father_name');
+            $murid->head_of_family = $request->input('head_of_family');
+            $murid->birthdate = $request->input('birthdate');
+            $murid->gender = $request->input('gender');
+            $murid->blood_group = $request->input('blood_group');
+            $murid->place = $request->input('place');
+            $murid->nid = $request->input('nid');
+            $murid->nationality = $request->input('nationality');
+            $murid->profession = $request->input('profession');
+            $murid->home_address = $request->input('home_address');
+            $murid->telephone_home = $request->input('telephone_home');
+            $murid->mobile = $request->input('mobile');
+            $murid->office_address = $request->input('office_address');
+            $murid->telephone_office = $request->input('telephone_office');
+            $murid->fax = $request->input('fax');
+            $murid->emergency_contact = $request->input('emergency_contact');
+            $murid->emergency_telephone = $request->input('emergency_telephone');
+            $murid->disciple_of = $request->input('disciple_of');
+            $murid->email = $request->input('email');
+            $murid->website = $request->input('website');
+            $murid->remarks = $request->input('remarks');
 
-                //photo upload
-                if ($request->hasFile('photo')) {
-                    //find old_photo
-                    $old_photo = $murid->photo;
-                    $photo_path = Utility::fileUpload($request, 'photo', 'mureeds');
-                    $murid->photo = $photo_path;
+            //photo upload
+            if ($request->hasFile('photo')) {
+                //find old_photo
+                $old_photo = $murid->photo;
+                $photo_path = Utility::fileUpload($request, 'photo', 'mureeds');
+                $murid->photo = $photo_path;
 
-                    if ($old_photo) {
-                        unlink($old_photo);
-                    }
+                if ($old_photo) {
+                    unlink($old_photo);
                 }
-                //signature upload
-                if ($request->hasFile('signature')) {
-                    $old_sign = $murid->signature;
-                    $sign_path = Utility::fileUpload($request, 'signature', 'mureeds');
-                    $murid->signature = $sign_path;
-                    if ($old_sign) {
-                        unlink($old_sign);
-                    }
+            }
+            //signature upload
+            if ($request->hasFile('signature')) {
+                $old_sign = $murid->signature;
+                $sign_path = Utility::fileUpload($request, 'signature', 'mureeds');
+                $murid->signature = $sign_path;
+                if ($old_sign) {
+                    unlink($old_sign);
                 }
+            }
 
-                $murid->updated_by = $this->guard()->user()->id;
+            $murid->updated_by = $this->guard()->user()->id;
 
-                if ($murid->save()) {
-                    return response()->json([
-                        'status' => true,
-                        'message' => 'Updated successfully mureed information',
-                        'mureed' => $murid,
-                    ]);
-                }
+            if ($murid->save()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Updated successfully mureed information',
+                    'mureed' => $murid,
+                ]);
+            }
 
             return response()->json([
                 'status' => false,
@@ -631,32 +636,28 @@ class UsersController extends Controller
         }
 
         $user = User::find($request->input('user_id'));
+        $mureed = Mureed::where('user_id', $request->input('user_id'))->first();
 
         if (!$user) {
             return response()->json([
                 'status' => false,
-                'message' => 'Did not find user'
+                'message' => 'Did not find user '
             ],);
         }
 
-        // remove image if uplaod
-        $mureed = $user->mureed ? $user->mureed : null;
+        $user->is_active = 0;
+        $user->deleted_at = Carbon::now();
+        $user->deleted_by = Auth::guard('api')->user()->id;
 
-        $photo = $signature = null;
-        if ($mureed) {
-            $photo = $mureed->photo;
-            $signature = $mureed->photo;
-        }
+        if ($user->save()) {
+            //murid
+            if ($mureed) {
+                $mureed->is_active = 0;
+                $mureed->deleted_at = Carbon::now();
+                $mureed->deleted_by =Auth::guard('api')->user()->id;
+                $mureed->save();
+            }
 
-        if ($user->delete()) {
-            //delete photo 
-            if($photo) {
-                unlink($photo);
-            }
-            //delete 
-            if($signature) {
-                unlink($signature);
-            }
             return response()->json([
                 'status' => true,
                 'message' => 'Deleted successfully'
