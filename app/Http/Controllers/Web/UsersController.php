@@ -37,8 +37,7 @@ class UsersController extends Controller
             'home_address' => 'required',
             'division_id' => 'required',
             'district_id' => 'required',
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required',
+            'photo' => 'required|mimes:jpg,png.jpeg,gif'
         ];
 
         //set validation custom message
@@ -46,8 +45,13 @@ class UsersController extends Controller
             'father_name.required' => 'Father/Husband name required',
             'division_id.required' => 'Division is required',
             'district_id.required' => 'District is required',
-            'password_confirmation.required' => 'Confirm password required',
         ];
+
+        if ($request->get('password')) {
+            $rules['password'] = 'required|confirmed';
+            $rules['password_confirmation'] = 'required';
+            $messages['password_confirmation.required'] = 'Confirm password required';
+        }
 
         $this->validate($request, $rules, $messages);
 

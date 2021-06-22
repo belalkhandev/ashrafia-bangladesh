@@ -27,7 +27,6 @@ if (!function_exists('getStatus')) {
 if (!function_exists('getBloodGroups')) {
     function getBloodGroups()
     {
-
         $bloods = [
             'o+' => 'O+ve',
             'o-' => 'O+ve',
