@@ -23,6 +23,7 @@
     <script src="{{ asset('assets/js/jquery.bundle49f7.js?ver=104') }}"></script>
     <script src="{{ asset('assets/js/submitter.js') }}"></script>
     <script src="{{ asset('assets/js/script49f7.js?ver=104') }}"></script>
+    @stack('footer-scripts')
 </body>
 
 </html>

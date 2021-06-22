@@ -47,15 +47,13 @@
                 <div class="input-item">
                     <label for="" class="input-item-label">Upazila</label>
                     <div class="select-wrapper">
-                        <select class="input-bordered" name="gender">
-                            <option value="">Select Upazila</option>
-                        </select>
+                        {!! Form::select('upazila', [], null, ['placeholder' => 'Select upazila', 'class' => 'input-bordered', 'id' => 'upazila']) !!}
                     </div>
                     <span class="text-danger"></span>
                 </div>
                 <div class="input-item">
                     <label for="" class="input-item-label">Telephone (Home)</label>
-                    <input type="text" name="telephone_home" placeholder="Telephone(Home)" class="input-bordered">
+                    <input type="text" name="telephone_home" placeholder="telephone home" class="input-bordered">
                     <span class="text-danger"></span>
                 </div>
             </div>
@@ -94,9 +92,7 @@
                 <div class="input-item">
                     <label for="" class="input-item-label">District</label>
                     <div class="select-wrapper">
-                        <select class="input-bordered" name="gender">
-                            <option value="">Select District</option>
-                        </select>
+                        {!! Form::select('district', [], null, ['placeholder' => 'Select District', 'class' => 'input-bordered', 'id' => 'district']) !!}
                     </div>
                     <span class="text-danger"></span>
                 </div>
@@ -192,7 +188,103 @@
         {!! Form::close() !!}
     </div>
 </div><!-- .card -->
-</div><!-- .row -->
-
-
+<template id="selectOption">
+    <option value=""></option>
+</template>
 @endsection
+
+
+@push('footer-scripts')
+<script>
+    (function($){
+        "use-strict"
+
+        jQuery(document).ready(function() {
+            // division change
+            $(document).on('change', '#division', function () {
+                let division_id = $(this).val();
+
+                if (division_id) {
+                    let _token = $('input[name="_token"]').val();
+                    const method = 'POST';
+
+                    $.ajax("{{ route('get.district') }}", {
+                        method: method,
+                        data: {
+                            division_id: division_id,
+                            _token:_token
+                        },
+                        beforeSend: function (xhr) {
+                            $('#district').html('<option value="">Loading......</option>');
+                            $('#upazila').html('<option value="">Select Upazila</option>');
+                        },
+                        success: function (res, status, xhr) {
+                            if (res.status) {
+                                let districts = res.data;
+                                const selectElement = document.getElementById('district');
+                                const optionTemplate = document.getElementById('selectOption');
+                                $('#district').html('<option vaule="">Select District</option>');
+
+                                for (const district of districts) {
+                                    const optionEl = document.importNode(optionTemplate.content, true);
+                                    optionEl.querySelector('option').textContent = district.name;
+                                    optionEl.querySelector('option').value = district.id;
+                                    selectElement.append(optionEl);
+                                }
+                            }
+                        },
+                        errors: function (jqXhr, textStatus, errorMessage) {
+                            console.log(textStatus);
+                        }
+                    });
+                } else {
+                    $('#upazila').html('<option value="">Select Upazila</option>');
+                    $('#district').html('<option value="">Select District</option>');
+                }
+            });
+
+            $(document).on('change', '#district', function () {
+                let district_id = $(this).val();
+
+                if (district_id) {
+                    let _token = $('input[name="_token"]').val();
+                    const method = 'POST';
+
+                    $.ajax("{{ route('get.upazila') }}", {
+                        method: method,
+                        data: {
+                            district_id: district_id,
+                            _token:_token
+                        },
+                        beforeSend: function (xhr) {
+                            $('#upazila').html('<option value="">Loading......</option>');
+                        },
+                        success: function (res, status, xhr) {
+                            if (res.status) {
+                                let upazilas = res.data;
+                                const selectElement = document.getElementById('upazila');
+                                const optionTemplate = document.getElementById('selectOption');
+                                $('#upazila').html('<option value="">Select Upazila</option>');
+
+                                for (const upazila of upazilas) {
+                                    const optionEl = document.importNode(optionTemplate.content, true);
+                                    optionEl.querySelector('option').textContent = upazila.name;
+                                    optionEl.querySelector('option').value = upazila.id;
+                                    selectElement.append(optionEl);
+                                }
+                            }
+                        },
+                        errors: function (jqXhr, textStatus, errorMessage) {
+                            console.log(textStatus);
+                        }
+                    });
+                } else {
+                    $('#district').html('<option value="">Select Upazila</option>');
+                }
+            });
+
+        });
+
+    }(jQuery))
+</script>
+@endpush

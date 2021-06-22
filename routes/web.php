@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxLoadController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Web\FrontendController;
@@ -37,6 +38,12 @@ Route::post('/register', [UsersController::class, 'store'])->name('fr.register.s
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+/*ajax loading*/
+Route::group(['prefix' => 'load'], function($router) {
+    $router->post('/district', [AjaxLoadController::class, 'getDistrict'])->name('get.district');
+    $router->post('/upazila', [AjaxLoadController::class, 'getUpazila'])->name('get.upazila');
+});
 
 //Auth::routes();
 
