@@ -61,7 +61,6 @@ formSubmit = function (t, e) {
             });
         }).fail(function (res) {
             errors = res.responseJSON['errors'];
-            console.log(errors);
             if (errors) {
                 $.each(errors, function (index, error) {
                     $("[name=" + index + "]").parents('.input-item').find('.text-danger').text(error);

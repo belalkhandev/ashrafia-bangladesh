@@ -40,9 +40,7 @@
                 <div class="input-item">
                     <label for="" class="input-item-label">Division</label>
                     <div class="select-wrapper">
-                        <select class="input-bordered" name="gender">
-                            <option value="">Select Division</option>
-                        </select>
+                        {!! Form::select('division', formSelectOptions($divisions), null, ['placeholder' => 'Select Division', 'class' => 'input-bordered', 'id' => 'division']) !!}
                     </div>
                     <span class="text-danger"></span>
                 </div>
@@ -158,6 +156,22 @@
                     <input type="text" name="disciple_of" placeholder="Disciple/Mureed of" class="input-bordered">
                     <span class="text-danger"></span>
                 </div>           
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-item input-with-label">
+                    <label class="input-item-label">Password</label>
+                    <input type="password" name="password" class="input-bordered" placeholder="Password" id="">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-item input-with-label">
+                    <label class="input-item-label">Password</label>
+                    <input type="password" name="password_confirmation" class="input-bordered" placeholder="Password Confirmation" id="">
+                    <span class="text-danger"></span>
+                </div>
             </div>
         </div>
         <div class="row">
