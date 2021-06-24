@@ -4,7 +4,7 @@
     <section class="log-reg-area section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-3">
+                <div class="col-md-4 col-sm-6 offset-sm-3 offset-md-4">
                     <div class="login-wrap">
                         <div class="login-header text-center">
                             <h2>Login</h2>
@@ -31,7 +31,9 @@
                                 </div>
                             {!! Form::close() !!}
                         </div>
-                        <div class="login-footer"></div>
+                        <div class="login-footer">
+                            <p>Have no account? <a href="{{ route('fr.register') }}">Register Now</a></p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@
                     </a>
                     <ul class="navbar-dropdown">
                         <li><a href="{{ route('user.list') }}">All User</a></li>
-                        <li><a href="{{ route('mureed.user.list') }}">Super admins</a></li>
+                        <li><a href="{{ route('mureed.user.list') }}">Mureeds</a></li>
                         <li><a href="{{ route('super.user.list') }}">Super admins</a></li>
                         <li><a href="{{ route('admin.user.list') }}">Admins</a></li>
                         <li><a href="{{ route('fr.register') }}">Add new</a></li>

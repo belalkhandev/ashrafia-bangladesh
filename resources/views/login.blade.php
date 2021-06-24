@@ -1,13 +1,11 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-    {{-- page title --}}
-    @include('frontend.partials._page_title')
 
     <section class="log-reg-area section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-3">
+                <div class="col-md-4 offset-4">
                     <div class="login-wrap">
                         <div class="login-header text-center">
                             <h2>Login</h2>
