@@ -7,9 +7,11 @@
     <meta name="description" content="Fully featured and complete ICO Dashboard template for ICO backend management.">
     <!-- Fav Icon -->
     <link rel="shortcut icon" href="images/favicon.png"><!-- Site Title  -->
-    <title>TokenWiz - ICO User Dashboard Admin Template</title><!-- Vendor Bundle CSS -->
+    <title>Anjumane Asharafia Bangaldesh</title><!-- Vendor Bundle CSS -->    
+    <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vendor.bundle49f7.css?ver=104') }}"><!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="layoutstyle">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" id="layoutstyle">
     
 </head>
 
@@ -22,6 +24,7 @@
     <!-- JavaScript (include all script here) -->
     <script src="{{ asset('assets/js/jquery.bundle49f7.js?ver=104') }}"></script>
     <script src="{{ asset('assets/js/submitter.js') }}"></script>
+    <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/script49f7.js?ver=104') }}"></script>
     @stack('footer-scripts')
 </body>

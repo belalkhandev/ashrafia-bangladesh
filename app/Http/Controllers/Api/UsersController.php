@@ -83,6 +83,15 @@ class UsersController extends Controller
     //user register
     public function register(Request $request)
     {
+        if ($this->guard()->user()) {
+            if (!$this->guard()->user()->hasRoles(['super_admin', 'admin'])) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Access denied'
+                ]);
+            }
+        }
+        
         //set validation rules
         $rules = [
             'name' => 'required',

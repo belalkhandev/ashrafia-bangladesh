@@ -69,7 +69,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="input-item">
                     <label for="" class="input-item-label">NID</label>
-                    <input type="text" name="NID" placeholder="NID" class="input-bordered">
+                    <input type="text" name="nid" placeholder="NID" class="input-bordered">
                     <span class="text-danger"></span>
                 </div>
             </div>

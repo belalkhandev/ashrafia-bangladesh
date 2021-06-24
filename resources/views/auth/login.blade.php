@@ -1,9 +1,6 @@
-@extends('frontend.layouts.master')
+@extends('layouts.master')
 
 @section('content')
-    {{-- page title --}}
-    @include('frontend.partials._page_title')
-
     <section class="log-reg-area section-padding">
         <div class="container">
             <div class="row">
@@ -17,8 +14,8 @@
                                 @csrf
                                 <div class="login-form">
                                     <div class="form-group">
-                                        <input type="text" name="email" placeholder="username" class="form-control" value="{{ old('email') }}">
-                                        @error('email')
+                                        <input type="text" name="username" placeholder="Username" class="form-control" value="{{ old('username') }}">
+                                        @error('username')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

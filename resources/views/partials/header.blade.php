@@ -19,21 +19,15 @@
                 @if(Auth::user())
                     <ul class="topbar-nav">
                         <li class="topbar-nav-item relative"><span
-                                class="user-welcome d-none d-lg-inline-block">Welcome! Stefan Harary</span><a
+                                class="user-welcome d-none d-lg-inline-block">Welcome! {{ Auth::user()->name }}</span><a
                                 class="toggle-tigger user-thumb" href="#"><em class="ti ti-user"></em></a>
                             <div
                                 class="toggle-class dropdown-content dropdown-content-right dropdown-arrow-right user-dropdown">
-                                <div class="user-status">
-                                    <h6 class="user-status-title">Token balance</h6>
-                                    <div class="user-status-balance">12,000,000 <small>TWZ</small></div>
-                                </div>
                                 <ul class="user-links">
                                     <li><a href="profile.html"><i class="ti ti-id-badge"></i>My Profile</a></li>
-                                    <li><a href="#"><i class="ti ti-infinite"></i>Referral</a></li>
-                                    <li><a href="activity.html"><i class="ti ti-eye"></i>Activity</a></li>
-                                </ul>
-                                <ul class="user-links bg-light">
-                                    <li><a href="sign-in.html"><i class="ti ti-power-off"></i>Logout</a></li>
+                                    <li><a href="profile.html"><i class="ti ti-id-badge"></i>Edit Profile</a></li>
+                                    <li><a href="#"><i class="ti ti-infinite"></i>Change Password</a></li>
+                                    <li><a href="{{ route('logout') }}"><i class="ti ti-power-off"></i>Logout</a></li>
                                 </ul>
                             </div>
                         </li><!-- .topbar-nav-item -->
@@ -42,5 +36,13 @@
             </div>
         </div><!-- .container -->
     </div><!-- .topbar -->
-    @include('partials.navigation')
+    @if(!Auth::user())
+        @include('partials.navigation')
+
+    @elseif(in_array(Auth::user()->role()->name, ['super_admin', 'admin']))
+        @include('partials.dashboard-navigation')
+
+    @elseif(Auth::user()->role()->name === 'disciple')
+        @include('partials.user-navigation')
+    @endif
 </div><!-- .topbar-wrap -->

@@ -26,7 +26,7 @@ class CreateMureedsTable extends Migration
             $table->enum('gender', ['male', 'female', 'other']);
             $table->string('blood_group')->nullable();
             $table->string('place')->nullable();
-            $table->string('nid')->unique();
+            $table->string('nid')->nullable()->unique();
             $table->string('nationality')->nullable();
             $table->string('profession')->nullable();
             $table->string('home_address')->nullable();

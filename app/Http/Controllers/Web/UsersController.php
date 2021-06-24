@@ -16,6 +16,11 @@ class UsersController extends Controller
 {
     public function register()
     {
+        if (Auth::user()) {
+            if (!Auth::user()->hasRoles(['super_admin', 'admin'])) {
+                abort(403, 'Access Denied');
+            }
+        }
         $data = [
             'divisions' => Division::get(),
         ];
@@ -25,18 +30,29 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+        if (Auth::user()) {
+            if (!Auth::user()->hasRoles(['super_admin', 'admin'])) {
+                abort(403, 'Access Denied');
+            }
+        }
         //set validation rules
         $rules = [
             'name' => 'required',
             'father_name' => 'required',
+            'head_of_family' => 'required',
             'birthdate' => 'required',
             'gender' => 'required',
             'nid' => 'unique:mureeds,nid',
             'nationality' => 'required',
+            'profession' => 'required',
+            'place' => 'required',
             'mobile' => 'required',
             'home_address' => 'required',
             'division_id' => 'required',
             'district_id' => 'required',
+            'emergency_contact' => 'required',
+            'contact_number' => 'required',
+            'disciple_of' => 'required',
             'photo' => 'required|mimes:jpg,png.jpeg,gif'
         ];
 
@@ -45,6 +61,7 @@ class UsersController extends Controller
             'father_name.required' => 'Father/Husband name required',
             'division_id.required' => 'Division is required',
             'district_id.required' => 'District is required',
+            'disciple_of.required' => 'Disciple of required',
         ];
 
         if ($request->get('password')) {
@@ -62,11 +79,10 @@ class UsersController extends Controller
             $user = new User();
             $user->name = $request->input('name');
             $user->username = User::userId();
-            $user->password = app('hash')->make($request->input('password'));
+            $user->password = app('hash')->make($request->input('password') ? $request->input('password') : '123@456');
             $user->otp = rand(111111, 999999);
 
             if ($user->save()) {
-
                 //assign role
                 $user->attachRole(Role::where('name', 'disciple')->first());
                 //register as murids
@@ -115,42 +131,51 @@ class UsersController extends Controller
 
                 $murid->save();
                 DB::commit();
+
                 $user->mureed;
 
-                $token = null;
-
-                if ($this->guard()->user()) {
-                    dd($this->guard()->user());
-                }
-
-                if(Auth::guard('api')->check()) {
+                if(Auth::user()) {
                     return response()->json([
-                        'status' => true,
+                        'type' => 'success',
+                        'title' => 'Congratulation',
                         'message' => 'Congratulations! User registered successfully',
-                        'user' => $user,
+                        'data' => $user,
                     ]);
-                } else {                    
-                    //create token
-                    $token = $user->createToken('ashrafia')->accessToken;
                 }
 
-                return response()->json([
-                    'status' => true,
-                    'message' => 'You have registered successfully',
-                    'user' => $user,
-                    'token' => $token
-                ]);
+                $password = $request->get('password') ? $request->get('password') : '123@456';
+
+                //atempt to login
+                 Auth::attempt(['username' => $user->username, 'password' => $password]);
+
+                if (!Auth::check()) {
+                    return response()->json([
+                        'type' => 'warning',
+                        'title' => 'Congratulation',
+                        'message' => 'You have registered successfully',
+                    ]);
+                } else {
+                    return response()->json([
+                        'type' => 'success',
+                        'title' => 'Congratulation',
+                        'message' => 'You have registered successfully',
+                    ]);
+                }
+
+                
             }
 
             return response()->json([
-                'status' => false,
+                'type' => 'warning',
+                'title' => 'Opps! Failed',
                 'message' => 'Failed to register',
             ]);
 
         }catch(\Exception $e) {
             DB::rollback();
             return response()->json([
-                'status' => false,
+                'type' => 'error',
+                'title' => 'Something went wrong',
                 'message' => 'An error occured while register. '.$e->getMessage() . $e->getLine(),
             ]);
         }

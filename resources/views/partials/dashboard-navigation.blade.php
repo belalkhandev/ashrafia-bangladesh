@@ -3,50 +3,41 @@
         <div class="navbar-innr">
             <ul class="navbar-menu">
                 <li>
-                    <a href="index.html">
-                        <em class="ikon ikon-dashboard"></em> 
+                    <a href="{{ route('fr.home') }}">
+                        <em class="ikon ikon-dashboard"></em>
                         Dashboard
                     </a>
                 </li>
-                <li>
-                    <a href="buy-token.html">
-                        <em class="ikon ikon-coins"></em> 
-                        Buy Tokens
-                    </a>
-                </li>
-                <li>
-                    <a href="ico-distribution.html">
-                        <em class="ikon ikon-distribution"></em> 
-                        ICO Distribution
-                    </a>
-                </li>
-                <li>
-                    <a href="transactions.html">
-                        <em class="ikon ikon-transactions"></em> 
-                        Transactions
-                    </a>
-                </li>
-                <li>
-                    <a href="profile.html">
-                        <em class="ikon ikon-user"></em> 
-                        Profile
-                    </a>
-                </li>
-                <li class="has-dropdown page-links-all">
-                    <a class="drop-toggle" href="#">
-                        <em class="ikon ikon-exchange"></em> Pages
+                <li class="has-dropdown">
+                    <a href="#" class="drop-toggle">
+                        <em class="ikon ikon-dashboard"></em>
+                        Users
                     </a>
                     <ul class="navbar-dropdown">
-                        <li class="has-dropdown"><a class="drop-toggle" href="#">Dashboards</a>
-                            <ul class="navbar-dropdown">
-                                <li><a href="index.html">Dashboard v1</a></li>
-                                <li><a href="index-v2.html">Dashboard v2 
-                                        <span class="badge badge-warning">New</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <li><a href="{{ route('user.list') }}">All User</a></li>
+                        <li><a href="{{ route('mureed.user.list') }}">Super admins</a></li>
+                        <li><a href="{{ route('super.user.list') }}">Super admins</a></li>
+                        <li><a href="{{ route('admin.user.list') }}">Admins</a></li>
+                        <li><a href="{{ route('fr.register') }}">Add new</a></li>
                     </ul>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <em class="ikon ikon-dashboard"></em>
+                        Notifications
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <em class="ikon ikon-user"></em>
+                        My Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <em class="ikon ikon-dashboard"></em>
+                        Logout
+                    </a>
                 </li>
             </ul>
         </div><!-- .navbar-innr -->

@@ -40,4 +40,9 @@ class Mureed extends Model
 
         return $age;
     }
+
+    public function setBirthdateAttribute($value)
+    {
+        return database_formatted_date($value);
+    }
 }

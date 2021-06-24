@@ -47,7 +47,7 @@ class LoginController extends Controller
      */
     public function username()
     {
-        if (filter_var(request()->email, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var(request()->username, FILTER_VALIDATE_EMAIL)) {
             return 'email';
         } else {
             return 'username';
@@ -62,10 +62,10 @@ class LoginController extends Controller
     public function loginValidation(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ], [
-            'email.required' => 'User id required'
+            'username.required' => 'User id required'
         ]);
     }
 
@@ -79,16 +79,19 @@ class LoginController extends Controller
         $this->loginValidation($request);
 
         //attempt login with usename or email
-        Auth::guard()->attempt([$this->username() => $request->email, 'password' => $request->password]);
+        Auth::guard()->attempt([$this->username() => $request->username, 'password' => $request->password]);
 
         //was any of those correct ?
         if (Auth::guard()->check()) {
+            if(Auth::guard()->user()->hasRoles(['super_admin', 'admin'])) {
+                return redirect()->intended('/dashboard');
+            }
             return redirect()->intended('/');
         }
 
         //Nope, something wrong during authentication
         return redirect()->back()->withErrors([
-            'email' => 'Invalid Userid or Password'
+            'username' => 'Invalid Userid or Password'
         ]);
     }
 
