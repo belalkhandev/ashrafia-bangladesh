@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\GeoLocationsController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,16 @@ Route::group([
     $router->post('me', [UsersController::class, 'me']);
     $router->get('role/list', [UsersController::class, 'roleList']);
     $router->post('delete', [UsersController::class, 'deleteUser']);
+});
+
+Route::group([
+    'middleware'=> 'auth:api',
+    'prefix' => 'notification'
+], function ($router) {
+    $router->get('/', [NotificationController::class, 'index']);
+    $router->post('/create', [NotificationController::class, 'store']);
+    $router->post('/edit', [NotificationController::class, 'update']);
+    $router->delete('/delete', [NotificationController::class, 'destroy']);
 });
 
 Route::group([

@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 
 class Mureed extends Model
 {
@@ -14,7 +15,7 @@ class Mureed extends Model
 
     public function getPhotoAttribute($value)
     {
-        $url = 'https://anjumaneashrafiabangladesh.com/';
+        $url= URL::to('/').'/';
         if ($value) {
             return $url.$value;
         }
@@ -24,7 +25,7 @@ class Mureed extends Model
 
     public function getSignatureAttribute($value)
     {
-        $url = 'https://anjumaneashrafiabangladesh.com/';
+        $url= URL::to('/').'/';
         if ($value) {
             return $url.$value;
         }
@@ -44,5 +45,20 @@ class Mureed extends Model
     public function setBirthdateAttribute($value)
     {
         return database_formatted_date($value);
+    }
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class, 'division_id', 'id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id', 'id');
+    }
+
+    public function upazila()
+    {
+        return $this->belongsTo(Upazila::class, 'upazila_id', 'id');
     }
 }

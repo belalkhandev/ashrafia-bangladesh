@@ -18,6 +18,7 @@ class CreateNotificationsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

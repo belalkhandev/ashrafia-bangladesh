@@ -11,19 +11,19 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('mureed.list') }}">
                                 <i class="fas fa-users"></i>
                                 <span>Mureeds</span>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('user.list') }}">
                                 <i class="fas fa-user-shield"></i>
                                 <span>Users</span>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('notification.list') }}">
                                 <i class="far fa-bell"></i>
                                 <span>Notifications</span>
                             </a>

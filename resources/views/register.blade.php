@@ -341,7 +341,6 @@
                     $('#district').html('<option value="">Select Upazila</option>');
                 }
             });
-
         });
 
     }(jQuery))

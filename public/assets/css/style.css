@@ -67,6 +67,10 @@ ul, ol {
   padding: 0;
 }
 
+img {
+  max-width: 100%;
+}
+
 .text-left {
   text-align: left;
 }
@@ -80,17 +84,9 @@ ul, ol {
 }
 
 .btn {
-  background-color: #00d285;
-  color: #ffffff;
   border: none;
   cursor: pointer;
-  padding: 8px 20px;
-  font-weight: 600;
-  border-radius: 5px;
-}
-
-.btn:hover {
-  background-color: #07a36a;
+  font-weight: 500;
 }
 
 .btn-primary {
@@ -138,6 +134,10 @@ ul, ol {
   box-shadow: none;
   outline: none;
   border-color: #00d285;
+}
+
+.form-group textarea.form-control {
+  height: auto;
 }
 
 .form-group .form-control ::placeholder {

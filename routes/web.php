@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\NotificationsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AjaxLoadController;
 use App\Http\Controllers\Auth\LoginController;
@@ -52,8 +53,15 @@ Route::group([
     'middleware' => 'auth'
 ], function($route){
     $route->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    $route->get('/alluser', [AdminController::class, 'userList'])->name('user.list');
-    $route->get('/mureeds', [AdminController::class, 'mureedUserList'])->name('mureed.user.list');
-    $route->get('/superadminuser', [AdminController::class, 'superUserList'])->name('super.user.list');
-    $route->get('/adminuser', [AdminController::class, 'adminUserList'])->name('admin.user.list');
+    $route->get('/mureeds', [AdminController::class, 'mureeds'])->name('mureed.list');
+    $route->get('/users', [AdminController::class, 'users'])->name('user.list');
+
+    $route->group(['prefix' => 'notification'], function($route) {
+        $route->get('/', [NotificationsController::class, 'index'])->name('notification.list');
+        $route->get('/create', [NotificationsController::class, 'create'])->name('notification.create');
+        $route->post('/create', [NotificationsController::class, 'store'])->name('notification.store');
+        $route->get('/edit/{notification_id}', [NotificationsController::class, 'edit'])->name('notification.edit');
+        $route->put('/edit/{notification_id}', [NotificationsController::class, 'update'])->name('notification.update');
+        $route->delete('/delete/{notification_id}', [NotificationsController::class, 'destroy'])->name('notification.delete');
+    });
 });
