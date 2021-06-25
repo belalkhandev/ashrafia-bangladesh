@@ -40,7 +40,7 @@ formSubmit = function (t, e) {
             let title = ret.title;
             if (ret.type == 'success') {
                 $(form)[0].reset();
-                resetSummernote();
+                //resetSummernote();
             }
             Swal.fire({
                 title: title,
@@ -54,7 +54,8 @@ formSubmit = function (t, e) {
                 if (ret.redirect_new_tab && res) {
                     redirectNewTab(ret.redirect_new_tab)
                 }
-            }, function (dismiss) {
+            }, 
+            function (dismiss) {
                 if (ret.redirect && dismiss === 'timer') {
                     redirect(ret.redirect);
                 }
@@ -139,6 +140,10 @@ function deleteSubmit(t, e) {
                             parent = res.parent;
                         }
                         $(t).parents(parent).remove();
+                        
+                        if (res.redirect) {
+                            redirect(res.redirect);
+                        }
                     }
                     swal.fire(title, res.message, icon);
                 },

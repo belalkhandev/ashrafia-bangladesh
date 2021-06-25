@@ -151,7 +151,7 @@
                             </li>
                             @if(Auth::user()->id === $user->id)
                             <li>
-                                <a href="">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                     <i class="fas fa-key"></i>
                                     <span>Change Password</span>
                                 </a>
@@ -159,13 +159,13 @@
                             @endif
                             @if(Auth::user()->hasRoles(['super_admin', 'admin']) && Auth::user()->id !== $user->id)
                             <li>
-                                <a href="">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
                                     <i class="fas fa-key"></i>
                                     <span>Reset Password</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#changeRoleModal">
                                     <i class="fas fa-cog"></i>
                                     <span>Change Role ({{ $user->role()->display_name }})</span>
                                 </a>
@@ -173,10 +173,12 @@
                             @endif
                             @if(Auth::user()->hasRoles(['super_admin']) && Auth::user()->id !== $user->id)
                             <li>
-                                <a href="" class="text-danger">
+                                {!! Form::open(['route' => ['user.delete', $user->id], 'method' => 'DELETE']) !!}
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="deleteSubmit(this, event)">
                                     <i class="fas fa-trash"></i>
                                     <span>Delete Account</span>
-                                </a>
+                                </button>
+                                {!! Form::close() !!}
                             </li>
                             @endif
                             
@@ -185,9 +187,7 @@
                 </div>
             </div>
         </div>
-        <div class="box-footer">
-
-        </div>
+        <div class="box-footer"></div>
     </div>
 
     @else
@@ -250,10 +250,12 @@
                             @endif
                             @if(Auth::user()->hasRoles(['super_admin']) && Auth::user()->id !== $user->id)
                             <li>
-                                <a href="" class="text-danger">
+                                {!! Form::open(['route', ['user.delete', $user->id], 'method' => 'DELETE']) !!}
+                                <button type="submit" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                     <span>Delete Account</span>
-                                </a>
+                                </button>
+                                {!! Form::close() !!}
                             </li>
                             @endif
                             
@@ -268,4 +270,43 @@
     </div>
     @endif
 
+    <div class="modal fade" id="changePasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+
+    @if(Auth::user()->hasRoles(['super_admin', 'admin']) && Auth::user()->id !== $user->id)
+        <div class="modal fade" id="resetPasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="changeRoleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Role</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection

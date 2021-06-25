@@ -57,6 +57,7 @@ Route::group([
     $route->get('/user/{id}/profile', [AdminController::class, 'profile'])->name('user.profile');
     $route->get('/user/{id}/profile/edit', [AdminController::class, 'profileEdit'])->name('user.profile.edit');
     $route->put('/user/{id}/profile/edit', [AdminController::class, 'profileUpdate'])->name('user.profile.update');
+    $route->delete('/user/{id}/delete', [AdminController::class, 'deleteUser'])->name('user.delete');
 
     $route->group(['prefix' => 'notification'], function($route) {
         $route->get('/', [NotificationsController::class, 'index'])->name('notification.list');

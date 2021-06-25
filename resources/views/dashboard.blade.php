@@ -9,7 +9,7 @@
                     <div class="widget-body">
                         <div class="widget-content">
                             <p class="text-secondary">Total Mureeds</p>
-                            <h1 class="text-info">{{ \App\Models\User::whereHas('roles', function ($q){ $q->where('name', 'disciple'); })->get()->count() }}</h1>
+                            <h1 class="text-info">{{ \App\Models\User::whereHas('mureed')->whereHas('roles', function ($q){ $q->where('name', 'disciple'); })->where('is_active', 1)->get()->count() }}</h1>
                         </div>
                         <div class="widget-icon">
                             <span>
@@ -95,7 +95,7 @@
                                     <td>{{ $user->mureed->home_address }}</td>
                                     <td>{{ user_formatted_date($user->created_at) }}</td>
                                     <td class="text-right">
-                                        <a href="" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('user.profile', $user->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

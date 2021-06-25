@@ -8,6 +8,7 @@ use App\Models\Mureed;
 use App\Models\Upazila;
 use App\Models\User;
 use App\Models\Utility;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,9 @@ class AdminController extends Controller
         $data = [
             'users' => User::whereHas('roles', function($q) {
                 $q->whereIn('name', ['super_admin', 'admin']);
-            })->paginate(10)
+            })
+            ->where('is_active', 1)
+            ->paginate(10)
         ];
 
         return view('user-list')->with($data);
@@ -29,7 +32,9 @@ class AdminController extends Controller
         $data = [
             'users' => User::whereHas('mureed')->whereHas('roles', function($q) {
                 $q->where('name', 'disciple');
-            })->paginate(10)
+            })
+            ->where('is_active', 1)
+            ->paginate(10)
         ];
 
         return view('mureeds')->with($data);
@@ -44,8 +49,14 @@ class AdminController extends Controller
             abort(403, 'Access Denied');
         }
 
+        $user = User::with('mureed')->where('is_active', 1)->find($id);
+
+        if (!$user) {
+            abort(404, 'Data not found');
+        }
+
         $data = [
-            'user' => User::with('mureed')->find($id)
+            'user' => $user
         ];
 
         return view('profile')->with($data);
@@ -186,16 +197,61 @@ class AdminController extends Controller
             }
 
             return response()->json([
-                'type' => 'success',
-                'title' => 'Congratulation',
-                'message' => 'Congratulations! Updated successfully'
+                'type' => 'warning',
+                'title' => 'Failed to update',
+                'message' => 'User failed to update'
             ]);
 
         }catch(\Exception $e) {
             return response()->json([
-                'status' => false,
-                'message' => 'An error occured while updating. '.$e->getMessage() . $e->getLine(),
+                'type' => 'error',
+                'title' => 'Failed!',
+                'message' => 'Something went wrong. '. $e->getMessage()
             ]);
         }
+    }
+
+    
+    public function deleteUser($id)
+    {
+        if (!Auth::user()->hasRoles(['super_admin'])) {
+            abort(403, 'Unauthorized Access');
+        }
+       
+        
+        $user = User::find($id);
+        $mureed = Mureed::where('user_id', $id)->first();
+
+        if (!$user) {
+            abort(404, 'Not found');
+        }
+
+        $user->is_active = 0;
+        $user->deleted_at = Carbon::now();
+        $user->deleted_by = Auth::user()->id;
+
+        if ($user->save()) {
+            //murid
+            if ($mureed) {
+                $mureed->is_active = 0;
+                $mureed->deleted_at = Carbon::now();
+                $mureed->deleted_by = Auth::user()->id;
+                $mureed->save();
+            }
+
+            return response()->json([
+                'type' => 'success',
+                'title' => 'Deleted!',
+                'message' => 'User has been deleted successfully',
+                'redirect' => route('mureed.list')
+            ]);
+        }
+
+        return response()->json([
+            'type' => 'error',
+            'title' => 'Failed!',
+            'message' => 'User failed to Delete.'
+        ]);
+
     }
 }

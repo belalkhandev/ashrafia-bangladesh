@@ -83,6 +83,13 @@ class LoginController extends Controller
 
         //was any of those correct ?
         if (Auth::guard()->check()) {
+            if (!Auth::guard()->user()->is_active) {
+                Auth::guard()->logout();
+                //Nope, something wrong during authentication
+                return redirect()->back()->withErrors([
+                    'username' => 'Sorry! You can not access your account'
+                ]);
+            }
             if(Auth::guard()->user()->hasRoles(['super_admin', 'admin'])) {
                 return redirect()->intended('/dashboard');
             }
@@ -100,7 +107,7 @@ class LoginController extends Controller
     {
         Auth::guard()->logout();
 
-        return redirect('/login');
+        return redirect('/');
     }
 
     /**
