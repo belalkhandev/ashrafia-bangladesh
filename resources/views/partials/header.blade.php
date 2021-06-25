@@ -32,5 +32,8 @@
             </div>
         </div>
     </div>
+    @if(Auth::user() && Auth::user()->hasRoles(['super_admin', 'admin']))
+        @include('partials.navigation')
+    @endif
 </header>
 <!-- /header -->

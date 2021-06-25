@@ -1,44 +1,48 @@
-<div class="navbar">
+<div class="dashboard-navigation">
     <div class="container">
-        <div class="navbar-innr">
-            <ul class="navbar-menu text-center">
-                <li>
-                    <a href="{{ route('fr.home') }}">
-                        <em class="ikon ikon-dashboard"></em>
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="index.html">
-                        <em class="ikon ikon-dashboard"></em>
-                        About Us
-                    </a>
-                </li>
-                <li>
-                    <a href="index.html">
-                        <em class="ikon ikon-dashboard"></em>
-                        Blogs
-                    </a>
-                </li>
-                <li>
-                    <a href="index.html">
-                        <em class="ikon ikon-dashboard"></em>
-                        Contact us
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('login') }}">
-                        <em class="ikon ikon-transactions"></em>
-                        Login
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('fr.register') }}">
-                        <em class="ikon ikon-user"></em>
-                        Register
-                    </a>
-                </li>
-            </ul>
-        </div><!-- .navbar-innr -->
-    </div><!-- .container -->
-</div><!-- .navbar -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="navbar">
+                    <ul>
+                        <li>
+                            <a href="{{ route('dashboard') }}">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-users"></i>
+                                <span>Mureeds</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-user-shield"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="far fa-bell"></i>
+                                <span>Notifications</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-user"></i>
+                                <span>My Profile ({{ Auth::user()->name }})</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-key"></i>
+                                <span>Change Password</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

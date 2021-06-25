@@ -403,6 +403,36 @@ table.table-hover tbody tr, .table.table-hover tbody tr {
   }
 }
 
+.dashboard-navigation {
+  background-color: #00d285;
+  margin-bottom: -10px;
+  margin-top: 15px;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navbar ul li {
+  margin-right: 30px;
+}
+
+.navbar ul li a {
+  display: block;
+  color: #ffffff;
+  padding: 5px 0px;
+}
+
+.navbar ul li:hover a {
+  color: #0e0e0d;
+}
+
+.navbar ul li:last-child {
+  margin-right: 0px;
+}
+
 .main-content {
   min-height: calc(100vh - 103px);
   background-color: #f2f4f5;
