@@ -69,7 +69,7 @@
         </div>
         <!-- login footer -->
         <div class="login-footer text-center mt-25">
-            <p>Don't Have Any Account? <a href="">Register Now</a></p>
+            <p>Don't Have Any Account? <a href="{{ route('fr.register') }}">Register Now</a></p>
         </div>
     </div>
 </div>

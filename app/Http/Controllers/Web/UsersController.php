@@ -148,19 +148,12 @@ class UsersController extends Controller
                 //atempt to login
                  Auth::attempt(['username' => $user->username, 'password' => $password]);
 
-                if (!Auth::check()) {
-                    return response()->json([
-                        'type' => 'warning',
-                        'title' => 'Congratulation',
-                        'message' => 'You have registered successfully',
-                    ]);
-                } else {
-                    return response()->json([
-                        'type' => 'success',
-                        'title' => 'Congratulation',
-                        'message' => 'You have registered successfully',
-                    ]);
-                }
+                 return response()->json([
+                    'type' => 'success',
+                    'title' => 'Congratulation',
+                    'message' => 'You have registered successfully',
+                    'redirect' => route('fr.home')
+                ]);
 
                 
             }

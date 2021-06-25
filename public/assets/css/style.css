@@ -111,6 +111,11 @@ ul, ol {
   background-color: #20201f;
 }
 
+.btn-sm {
+  padding: 3px 7px;
+  font-size: 12px;
+}
+
 .form-group {
   margin-bottom: 15px;
 }
@@ -250,6 +255,73 @@ table.table-hover tbody tr, .table.table-hover tbody tr {
   cursor: pointer;
 }
 
+.widgets {
+  margin-bottom: 15px;
+}
+
+.widgets .widget-item {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px #00000014;
+  padding: 10px;
+  border-bottom: 3px solid #00d285;
+  margin-bottom: 15px;
+}
+
+.widgets .widget-item .widget-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.widgets .widget-item .widget-body .widget-content h1 {
+  margin-top: 5px;
+}
+
+.widgets .widget-item .widget-body .widget-icon span {
+  background: linear-gradient(45deg, #00d285, #0dcaf0);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #ffffff;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.widgets .widget-item.widget-one {
+  border-bottom: 3px solid #0dcaf0;
+}
+
+.widgets .widget-item.widget-one .widget-body .widget-icon span {
+  background: linear-gradient(45deg, #17ead9, #6078ea) !important;
+}
+
+.widgets .widget-item.widget-two {
+  border-bottom: 3px solid #dc3545;
+}
+
+.widgets .widget-item.widget-two .widget-body .widget-icon span {
+  background: linear-gradient(45deg, #f54ea2, #ff7676) !important;
+}
+
+.widgets .widget-item.widget-three {
+  border-bottom: 3px solid #198754;
+}
+
+.widgets .widget-item.widget-three .widget-body .widget-icon span {
+  background: linear-gradient(45deg, #00b09b, #96c93d) !important;
+}
+
+.widgets .widget-item.widget-four {
+  border-bottom: 3px solid #ffc107;
+}
+
+.widgets .widget-item.widget-four .widget-body .widget-icon span {
+  background: linear-gradient(45deg, #ffdf40, #ff8359) !important;
+}
+
 .header {
   background-color: #ffffff;
   box-shadow: 0px 0px 10px #00000015;
@@ -282,7 +354,7 @@ table.table-hover tbody tr, .table.table-hover tbody tr {
   display: block;
   padding: 10px 15px;
   color: #0e0e0d;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .mainmenu ul li a:hover {

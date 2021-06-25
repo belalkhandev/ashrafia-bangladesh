@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('otp');
             $table->boolean('is_verified')->default(false);
             $table->boolean('is_active')->default(true);
+            $table->text('uuid')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->dateTime('deleted_at')->nullable();
