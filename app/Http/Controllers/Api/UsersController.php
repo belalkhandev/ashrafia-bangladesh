@@ -136,6 +136,7 @@ class UsersController extends Controller
             $user->username = User::userId();
             $user->password = app('hash')->make($request->input('password'));
             $user->otp = rand(111111, 999999);
+            $user->uuids = $request->input('uuids') ? $request->input('uuids') : null;
 
             if ($user->save()) {
 
@@ -256,9 +257,12 @@ class UsersController extends Controller
         $credentials = $request->only('username', 'password');
 
         if ($authorized = Auth::guard()->attempt($credentials)) {
-            $user = Auth::guard()->user();
+            $user = Auth::guard()->user();     
 
             if ($user->is_active) {
+                $user->uuids = $request->input('uuids') ? $request->input('uuids') : null;
+                $user->save();
+                
                 $token = $user->createToken($authorized)->accessToken;    
                 $user->mureed;
 
