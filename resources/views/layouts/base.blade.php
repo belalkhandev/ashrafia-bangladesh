@@ -4,28 +4,31 @@
     <meta charset="utf-8">
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Fully featured and complete ICO Dashboard template for ICO backend management.">
-    <!-- Fav Icon -->
-    <link rel="shortcut icon" href="images/favicon.png"><!-- Site Title  -->
-    <title>Anjumane Asharafia Bangaldesh</title><!-- Vendor Bundle CSS -->    
-    <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert/sweetalert2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/vendor.bundle49f7.css?ver=104') }}"><!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="layoutstyle">
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" id="layoutstyle">
-    
+    <meta name="description" content="Anjuman e Asharfia Bangladesh">
+    <!-- vendors -->
+    <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/fontawesome/css/all.min.css') }}">
+    <!-- main styles-->
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    @stack('header-scripts')
 </head>
 
-<body class="page-user">
+<body>
 
 
     @yield('base.content')
-        
+
 
     <!-- JavaScript (include all script here) -->
-    <script src="{{ asset('assets/js/jquery.bundle49f7.js?ver=104') }}"></script>
-    <script src="{{ asset('assets/js/submitter.js') }}"></script>
-    <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('assets/js/script49f7.js?ver=104') }}"></script>
+    <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/bootstrap/js/popper.min.j') }}s"></script>
+    <script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/fontawesome/js/all.min.js') }}"></script>
+    {{--  Ajax Submitter  --}}
+    <script src="{{ asset('assets/js/ajax-submitter.js') }}"></script>
+    <script src="{{ asset('assets/vendors/sweetalert/sweetalert2.min.js') }}"></script>
     @stack('footer-scripts')
 </body>
 

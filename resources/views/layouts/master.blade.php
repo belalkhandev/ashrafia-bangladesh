@@ -4,7 +4,7 @@
 
     @include('partials.header')
 
-    <main class="page-content">
+    <main class="main-content pt-50 pb-50">
         <div class="container">
             @yield('content')
         </div>

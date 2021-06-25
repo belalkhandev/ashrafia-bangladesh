@@ -1,43 +1,82 @@
-@extends('layouts.master')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- vendors -->
+    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/fontawesome/css/all.min.css') }}">
+    <!-- main styles-->
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+</head>
+<body>
 
-@section('content')
-    <section class="log-reg-area section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 offset-sm-3 offset-md-4">
-                    <div class="login-wrap">
-                        <div class="login-header text-center">
-                            <h2>Login</h2>
-                        </div>
-                        <div class="login-body">
-                            {!! Form::open(['route' => 'login', 'method' => 'POST']) !!}
-                                @csrf
-                                <div class="login-form">
-                                    <div class="form-group">
-                                        <input type="text" name="username" placeholder="Username" class="form-control" value="{{ old('username') }}">
-                                        @error('username')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" placeholder="password" class="form-control">
-                                        @error('password')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-submit-group">
-                                        <button class="btn submit-btn btn-success " type="submit">Login</button>
-                                    </div>
-                                </div>
-                            {!! Form::close() !!}
-                        </div>
-                        <div class="login-footer">
-                            <p>Have no account? <a href="{{ route('fr.register') }}">Register Now</a></p>
-                        </div>
-                    </div>
-                </div>
+<!-- login container -->
+<div class="login-container">
+    <!-- login content -->
+    <div class="login-content">
+        <!-- login header -->
+        <div class="login-header mb-30 pt-15">
+            <div class="logo">
+                <h2>Anjuman-E-Ashrafia Bangladesh</h2>
+                <p>Log In to Your Account</p>
             </div>
         </div>
-    </section>
+        <!-- login body -->
+        <div class="login-body">
+            {!! Form::open(['route' => 'login', 'method' => 'POST']) !!}
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input type="text" name="username" placeholder="Username/Userid" class="form-control" value="{{ old('username') }}">
+                    </div>
+                    @error('username')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-key"></i>
+                        </span>
+                        <input type="password" name="password" placeholder="*********" class="form-control">
+                    </div>
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-controls mb-15">
+                    <div class="form-control-item">
+                        <label>
+                            <input type="checkbox" name="remember_me" >
+                            <span>Remember me</span>
+                        </label>
+                    </div>
+                    <div class="form-control-item">
+                        <i class="fas fa-lock"></i>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                </div>
+                <div class="form-submit-control mt-30">
+                    <button class="btn btn-primary w-100" type="submit">Log In</button>
+                </div>
+            {!! Form::close() !!}
+        </div>
+        <!-- login footer -->
+        <div class="login-footer text-center mt-25">
+            <p>Don't Have Any Account? <a href="">Register Now</a></p>
+        </div>
+    </div>
+</div>
 
-@endsection
+<!-- scripts -->
+<script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/bootstrap/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.min.j') }}s"></script>
+</body>
+</html>

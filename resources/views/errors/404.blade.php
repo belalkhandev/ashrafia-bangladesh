@@ -3,7 +3,7 @@
 @section('base.content')
     @include('partials.header')
 
-        <div class="page-content">
+        <main class="main-content">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
 
     @include('partials.footer')
 @endsection

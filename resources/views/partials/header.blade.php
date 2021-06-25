@@ -1,48 +1,30 @@
-<div class="topbar-wrap">
-    <div class="topbar is-sticky">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <ul class="topbar-nav d-lg-none">
-                    <li class="topbar-nav-item relative"><a class="toggle-nav" href="#">
-                            <div class="toggle-icon">
-                                <span class="toggle-line"></span>
-                                <span class="toggle-line"></span>
-                                <span class="toggle-line"></span>
-                                <span class="toggle-line"></span>
-                            </div>
-                        </a>
-                    </li><!-- .topbar-nav-item -->
-                </ul><!-- .topbar-nav -->
-                <a class="topbar-logo" href="index-2.html">
-                    <img src="images/logo-light2x.png" srcset="{{ asset('assets/images/anjlogo.png') }}" alt="logo">
-                </a>
-                @if(Auth::user())
-                    <ul class="topbar-nav">
-                        <li class="topbar-nav-item relative"><span
-                                class="user-welcome d-none d-lg-inline-block">Welcome! {{ Auth::user()->name }}</span><a
-                                class="toggle-tigger user-thumb" href="#"><em class="ti ti-user"></em></a>
-                            <div
-                                class="toggle-class dropdown-content dropdown-content-right dropdown-arrow-right user-dropdown">
-                                <ul class="user-links">
-                                    <li><a href="profile.html"><i class="ti ti-id-badge"></i>My Profile</a></li>
-                                    <li><a href="profile.html"><i class="ti ti-id-badge"></i>Edit Profile</a></li>
-                                    <li><a href="#"><i class="ti ti-infinite"></i>Change Password</a></li>
-                                    <li><a href="{{ route('logout') }}"><i class="ti ti-power-off"></i>Logout</a></li>
-                                </ul>
-                            </div>
-                        </li><!-- .topbar-nav-item -->
-                    </ul><!-- .topbar-nav -->
-                @endif
+<!-- header -->
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="logo">
+                    <a href="{{ route('fr.home') }}">
+                        <h2>AnjumanEAshrafia Bangladesh</h2>
+                    </a>
+                </div>
             </div>
-        </div><!-- .container -->
-    </div><!-- .topbar -->
-    @if(!Auth::user())
-        @include('partials.navigation')
-
-    @elseif(in_array(Auth::user()->role()->name, ['super_admin', 'admin']))
-        @include('partials.dashboard-navigation')
-
-    @elseif(Auth::user()->role()->name === 'disciple')
-        @include('partials.user-navigation')
-    @endif
-</div><!-- .topbar-wrap -->
+            <div class="col-lg-8 col-md-8">
+                <nav class="mainmenu">
+                    <ul>
+                        @if(!Auth::user())
+                        <li><a href="">Home</a></li>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Contact Us</a></li>
+                        <li class="auth-link login-link"><a href="{{ route('login') }}">Login</a></li>
+                        <li class="auth-link register-link"><a href="{{ route('fr.register') }}">Register</a></li>
+                        @else
+                        <li><a href="{{ route('logout') }}">Logout ({{ Auth::user()->name }})</a></li>
+                        @endif
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- /header -->

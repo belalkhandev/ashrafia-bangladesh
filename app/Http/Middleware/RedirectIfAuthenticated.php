@@ -24,10 +24,10 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 if (Auth::guard()->user()->hasRole(['super_admin', 'admin'])) {
-                    return redirect()->route('fr.dashboard');
+                    return redirect()->route('dashboard');
                 }
 
-                return redirect()->route('fr.home');
+                return redirect()->route('dashboard');
             }
         }
 
