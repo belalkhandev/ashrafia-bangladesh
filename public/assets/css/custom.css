@@ -14,3 +14,86 @@
     height: 100%;
     transform: translate(0%, -50%);
 }
+
+/* user profile */
+.profile-section-title {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #00d285;
+    border-bottom: 1px solid #00d285;
+}
+
+.profile-section-title:first-child {    
+    margin-top: 0px;
+}
+
+.user-profile table th, .user-profile table td {
+    border-bottom: 1px solid #f2f4f5 !important;
+    padding: 5px 0px;
+}
+
+.user-profile table th {
+    width: 180px;
+    font-size: 13px;
+}
+
+.user-profile img {
+    border: 1px solid #00d285;
+    padding: 5px;
+    background: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.user-profile h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.user-profile .btn-secondary {
+    margin-top: 15px;
+}
+
+.user-profile img {
+    border: 1px solid #00d285;
+    padding: 5px;
+    background: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.user-profile h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.user-profile .btn-secondary {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.user-profile p {
+    margin-bottom: 5px;
+}
+
+.user-profile p svg, .user-profile i.fas {
+    margin-right: 5px;
+    color: #00d285;
+}
+
+.profile-navbar ul li {
+    display: inline;
+}
+
+.profile-navbar ul li a {
+    display: block;
+    padding: 5px 0px;
+    color: #0e0e0d;
+}
+
+.profile-navbar ul li a:hover {
+    color: #00d285;
+}

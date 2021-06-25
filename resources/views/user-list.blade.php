@@ -30,7 +30,10 @@
                                     <td>{{ $user->role()->name }}</td>
                                     <td>{{ user_formatted_date($user->created_at) }}</td>
                                     <td class="text-right">
-                                        <a href="" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                                        <div class="action-group">
+                                            <a href="{{ route('user.profile', $user->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                                            <a href="" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach

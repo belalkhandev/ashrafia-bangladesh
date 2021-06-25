@@ -51,7 +51,7 @@ class UsersController extends Controller
             'division_id' => 'required',
             'district_id' => 'required',
             'emergency_contact' => 'required',
-            'contact_number' => 'required',
+            'emergency_telephone' => 'required',
             'disciple_of' => 'required',
             'photo' => 'required|mimes:jpg,png.jpeg,gif'
         ];
@@ -139,7 +139,6 @@ class UsersController extends Controller
                         'type' => 'success',
                         'title' => 'Congratulation',
                         'message' => 'Congratulations! User registered successfully',
-                        'data' => $user,
                     ]);
                 }
 

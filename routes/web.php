@@ -5,7 +5,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AjaxLoadController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Web\FrontendController;
 use App\Http\Controllers\Web\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +54,9 @@ Route::group([
     $route->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     $route->get('/mureeds', [AdminController::class, 'mureeds'])->name('mureed.list');
     $route->get('/users', [AdminController::class, 'users'])->name('user.list');
+    $route->get('/user/{id}/profile', [AdminController::class, 'profile'])->name('user.profile');
+    $route->get('/user/{id}/profile/edit', [AdminController::class, 'profileEdit'])->name('user.profile.edit');
+    $route->put('/user/{id}/profile/edit', [AdminController::class, 'profileUpdate'])->name('user.profile.update');
 
     $route->group(['prefix' => 'notification'], function($route) {
         $route->get('/', [NotificationsController::class, 'index'])->name('notification.list');

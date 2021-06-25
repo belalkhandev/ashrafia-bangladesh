@@ -23,7 +23,7 @@
                             <li><a href="{{ route('fr.home') }}">Home</a></li>
                             <li><a href="">About Us</a></li>
                             <li><a href="">Contact Us</a></li>
-                            <li><a href="">My Profile ({{ Auth::user()->name }})</a></li>
+                            <li><a href="{{ route('user.profile', Auth::user()->id) }}">My Profile ({{ Auth::user()->name }})</a></li>
                         @endif
                         <li><a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                         @endif

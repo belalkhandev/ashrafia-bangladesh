@@ -29,7 +29,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('user.profile', Auth::user()->id) }}">
                                 <i class="fas fa-user"></i>
                                 <span>My Profile ({{ Auth::user()->name }})</span>
                             </a>
