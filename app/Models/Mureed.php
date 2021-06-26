@@ -42,11 +42,6 @@ class Mureed extends Model
         return $age;
     }
 
-    public function setBirthdateAttribute($value)
-    {
-        return database_formatted_date($value);
-    }
-
     public function division()
     {
         return $this->belongsTo(Division::class, 'division_id', 'id');

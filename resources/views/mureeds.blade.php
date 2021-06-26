@@ -50,7 +50,11 @@
                                         <div class="action-group">
                                             <a href="{{ route('user.profile', $user->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('user.profile.edit', $user->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                            <a href="" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                            {!! Form::open(['route' => ['user.delete', $user->id], 'method' => 'DELETE']) !!}
+                                            <button class="btn btn-sm btn-danger" type="submit" onclick="deleteSubmit(this, event)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </td>
                                 </tr>

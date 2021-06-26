@@ -136,7 +136,7 @@ class UsersController extends Controller
             $user->username = User::userId();
             $user->password = app('hash')->make($request->input('password'));
             $user->otp = rand(111111, 999999);
-            $user->uuids = $request->input('uuids') ? $request->input('uuids') : null;
+            $user->uuid = $request->input('uuid') ? $request->input('uuid') : null;
 
             if ($user->save()) {
 
@@ -151,7 +151,7 @@ class UsersController extends Controller
                 $murid->name = $request->input('name');
                 $murid->father_name = $request->input('father_name');
                 $murid->head_of_family = $request->input('head_of_family');
-                $murid->birthdate = $request->input('birthdate');
+                $murid->birthdate = database_formatted_date($request->input('birthdate'));
                 $murid->gender = $request->input('gender');
                 $murid->blood_group = $request->input('blood_group');
                 $murid->place = $request->input('place');

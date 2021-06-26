@@ -22,7 +22,7 @@ class CreateMureedsTable extends Migration
             $table->string('name');
             $table->string('father_name')->nullable();
             $table->string('head_of_family')->nullable();
-            $table->date('birthdate')->nullable();
+            $table->string('birthdate')->nullable();
             $table->enum('gender', ['male', 'female', 'other']);
             $table->string('blood_group')->nullable();
             $table->string('place')->nullable();

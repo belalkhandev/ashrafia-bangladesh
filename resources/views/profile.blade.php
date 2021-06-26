@@ -94,7 +94,7 @@
                             </tr>
                             <tr>
                                 <th>Upazila</th>
-                                <td>{{ $user->mureed->upazila->name }}</td>
+                                <td>{{ $user->mureed->upazila ? $user->mureed->upazila->name : "-" }}</td>
                             </tr>
                             <tr>
                                 <th>Home Address</th>
@@ -122,7 +122,7 @@
                             </tr>
                             <tr>
                                 <th>Fax</th>
-                                <td>{{ $user->mureed->upazila->name }}</td>
+                                <td>{{ $user->mureed->fax }}</td>
                             </tr>
                         </table>
 
@@ -228,7 +228,7 @@
                         <ul>
                             @if(Auth::user()->id === $user->id)
                             <li>
-                                <a href="">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                     <i class="fas fa-key"></i>
                                     <span>Change Password</span>
                                 </a>
@@ -277,8 +277,28 @@
                     <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body"></div>
-                <div class="modal-footer"></div>
+                {!! Form::open(['route' => ['user.change.password', $user->id], 'method' => 'PUT']) !!}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Current Password</label>
+                            <input type="password" name="current_password" placeholder="********" class="form-control">
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">New Password</label>
+                            <input type="password" name="password" placeholder="********" class="form-control">
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Confirm Password</label>
+                            <input type="password" name="password_confirmation" placeholder="********" class="form-control">
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">Reset Password</button>
+                    </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -291,8 +311,23 @@
                         <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body"></div>
-                    <div class="modal-footer"></div>
+                    {!! Form::open(['route' => ['user.reset.password', $user->id], 'method' => 'PUT']) !!}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">New Password</label>
+                            <input type="password" name="password" placeholder="********" class="form-control">
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Confirm Password</label>
+                            <input type="password" name="password_confirmation" placeholder="********" class="form-control">
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">Reset Password</button>
+                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
@@ -303,8 +338,18 @@
                         <h5 class="modal-title" id="exampleModalLabel">Update Role</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body"></div>
-                    <div class="modal-footer"></div>
+                    {!! Form::open(['route' => ['user.role.update', $user->id], 'method' => 'PUT']) !!}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Role</label>
+                            {!! Form::select('role', formSelectOptions(\App\Models\Role::get(), 'id', 'display_name'), $user->role()->id, ['placeholder' => 'Select Role', 'class' => 'form-control']) !!}
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">Change Role</button>
+                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

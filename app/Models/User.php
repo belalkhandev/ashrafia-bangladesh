@@ -195,17 +195,12 @@ class User extends Authenticatable
     //auto generated userd
     public static function userId()
     {
-        $last_user = User::where('username', 'LIKE', 'user%')->orderBy('id', 'DESC')->first();
-
-        if ($last_user) {
-            $exp = explode('user-', $last_user->username);
-            $user_no = $exp[1]+1;
-            $userId = "user-".$user_no;
-
-            return $userId;
-
-        }
-        return 'user-1';
+        do {
+            $userid = "u".substr(sha1(mt_rand()),15,8);
+            $exist = User::where('username', $userid)->first();
+        } while ($exist);
+       
+        return $userid;
     }
 
     public function mureed()

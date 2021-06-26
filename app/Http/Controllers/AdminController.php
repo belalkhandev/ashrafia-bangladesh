@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\District;
 use App\Models\Division;
 use App\Models\Mureed;
+use App\Models\Role;
 use App\Models\Upazila;
 use App\Models\User;
 use App\Models\Utility;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -21,6 +23,7 @@ class AdminController extends Controller
                 $q->whereIn('name', ['super_admin', 'admin']);
             })
             ->where('is_active', 1)
+            ->where('id', '!=' ,Auth::user()->id)
             ->paginate(10)
         ];
 
@@ -136,7 +139,7 @@ class AdminController extends Controller
             $murid->name = $request->get('name');
             $murid->father_name = $request->get('father_name');
             $murid->head_of_family = $request->get('head_of_family');
-            $murid->birthdate = $request->get('birthdate');
+            $murid->birthdate = database_formatted_date($request->get('birthdate'));
             $murid->gender = $request->get('gender');
             $murid->blood_group = $request->get('blood_group');
             $murid->place = $request->get('place');
@@ -251,6 +254,143 @@ class AdminController extends Controller
             'type' => 'error',
             'title' => 'Failed!',
             'message' => 'User failed to Delete.'
+        ]);
+
+    }
+
+    /**
+     * update user role
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function roleUpdate(Request $request, $id)
+    {
+        if (!Auth::user()->hasRoles(['super_admin'])) {
+            return response()->json([
+                'type' => 'warning',
+                'title' => 'Access Denied',
+                'message' => 'You have no access to chagne'
+            ]);
+        }
+
+        
+        //set validation rules
+        $rules = [
+            'role' => 'required',
+        ];
+
+        //make validation
+       $this->validate($request, $rules);
+
+
+        $user = User::find($id);
+        $user->detachRole($user->role());
+        //attach new role
+        $role = Role::find($request->get('role'));
+        $user->attachRole($role);
+
+        return response()->json([
+            'type' => 'success',
+            'title' => 'Congrates!',
+            'message' => 'Role updated successfully'
+        ]);
+
+    }
+
+    /**
+     * update user pasword
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updatePassword(Request $request, $id)
+    {
+
+        if (!Auth::user()->id == $id) {
+            return response()->json([
+                'type' => 'warning',
+                'title' => 'Access Denied',
+                'message' => 'You have no permission to change'
+            ]);
+        }
+        
+        //set validation rules
+        $rules = [
+            'current_password' => 'required',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+        ];
+
+        //make validation
+       $this->validate($request, $rules);
+
+        //check current passwwor matched
+        if(!Hash::check($request->get('current_password'), Auth::user()->password)){
+            return response()->json([
+                'type' => 'warning',
+                'title' => 'Password Mismatch',
+                'message' => 'Current password does match'
+            ]);
+        } else {
+            $user = Auth::user();
+            $user->password = Hash::make($request['password']);
+
+            if ($user->save()) {
+                return response()->json([
+                    'type' => 'success',
+                    'title' => 'Change Successfully',
+                    'message' => 'Password change successfully'
+                ]);
+            }
+
+            return response()->json([
+                'type' => 'warning',
+                'title' => 'Failed!',
+                'message' => 'Password failed to change'
+            ]);
+        }
+
+    }
+    
+    /**
+     * update user pasword
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function resetPassword(Request $request, $id)
+    {
+        if (!Auth::user()->hasRoles(['super_admin'])) {
+            return response()->json([
+                'type' => 'warning',
+                'title' => 'Access Denied',
+                'message' => 'You have no access to chagne'
+            ]);
+        }
+        
+        //set validation rules
+        $rules = [
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+        ];
+
+        //make validation
+       $this->validate($request, $rules);
+
+        //check current passwwor matched
+        $user = User::find($id);
+        $user->password = Hash::make($request['password']);
+
+        if ($user->save()) {
+            return response()->json([
+                'type' => 'success',
+                'title' => 'Reset Successfully',
+                'message' => 'Password reset successfully'
+            ]);
+        }
+
+        return response()->json([
+            'type' => 'warning',
+            'title' => 'Failed!',
+            'message' => 'Password failed to reset'
         ]);
 
     }

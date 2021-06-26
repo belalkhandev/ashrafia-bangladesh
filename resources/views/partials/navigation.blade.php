@@ -34,12 +34,6 @@
                                 <span>My Profile ({{ Auth::user()->name }})</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="">
-                                <i class="fas fa-key"></i>
-                                <span>Change Password</span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>

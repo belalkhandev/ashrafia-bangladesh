@@ -77,9 +77,9 @@ class UsersController extends Controller
 
             //register new user
             $user = new User();
-            $user->name = $request->input('name');
+            $user->name = $request->get('name');
             $user->username = User::userId();
-            $user->password = app('hash')->make($request->input('password') ? $request->input('password') : '123@456');
+            $user->password = app('hash')->make($request->get('password') ? $request->get('password') : '123@456');
             $user->otp = rand(111111, 999999);
 
             if ($user->save()) {
@@ -88,31 +88,31 @@ class UsersController extends Controller
                 //register as murids
                 $murid = new Mureed();
                 $murid->user_id = $user->id;
-                $murid->division_id = $request->input('division_id');
-                $murid->district_id = $request->input('district_id');
-                $murid->upazila_id = $request->input('upazila_id');
-                $murid->name = $request->input('name');
-                $murid->father_name = $request->input('father_name');
-                $murid->head_of_family = $request->input('head_of_family');
-                $murid->birthdate = $request->input('birthdate');
-                $murid->gender = $request->input('gender');
-                $murid->blood_group = $request->input('blood_group');
-                $murid->place = $request->input('place');
-                $murid->nid = $request->input('nid');
-                $murid->nationality = $request->input('nationality');
-                $murid->profession = $request->input('profession');
-                $murid->home_address = $request->input('home_address');
-                $murid->telephone_home = $request->input('telephone_home');
-                $murid->mobile = $request->input('mobile');
-                $murid->office_address = $request->input('office_address');
-                $murid->telephone_office = $request->input('telephone_office');
-                $murid->fax = $request->input('fax');
-                $murid->emergency_contact = $request->input('emergency_contact');
-                $murid->emergency_telephone = $request->input('emergency_telephone');
-                $murid->disciple_of = $request->input('disciple_of');
-                $murid->email = $request->input('email');
-                $murid->website = $request->input('website');
-                $murid->remarks = $request->input('remarks');
+                $murid->division_id = $request->get('division_id');
+                $murid->district_id = $request->get('district_id');
+                $murid->upazila_id = $request->get('upazila_id');
+                $murid->name = $request->get('name');
+                $murid->father_name = $request->get('father_name');
+                $murid->head_of_family = $request->get('head_of_family');
+                $murid->birthdate = database_formatted_date($request->get('birthdate'));
+                $murid->gender = $request->get('gender');
+                $murid->blood_group = $request->get('blood_group');
+                $murid->place = $request->get('place');
+                $murid->nid = $request->get('nid');
+                $murid->nationality = $request->get('nationality');
+                $murid->profession = $request->get('profession');
+                $murid->home_address = $request->get('home_address');
+                $murid->telephone_home = $request->get('telephone_home');
+                $murid->mobile = $request->get('mobile');
+                $murid->office_address = $request->get('office_address');
+                $murid->telephone_office = $request->get('telephone_office');
+                $murid->fax = $request->get('fax');
+                $murid->emergency_contact = $request->get('emergency_contact');
+                $murid->emergency_telephone = $request->get('emergency_telephone');
+                $murid->disciple_of = $request->get('disciple_of');
+                $murid->email = $request->get('email');
+                $murid->website = $request->get('website');
+                $murid->remarks = $request->get('remarks');
 
                 //photo upload
                 if ($request->hasFile('photo')) {
