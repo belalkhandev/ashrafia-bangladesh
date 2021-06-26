@@ -17,7 +17,6 @@
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Image</th>
-                                <th>Status</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
@@ -28,7 +27,6 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $notif->title }}</td>
                                     <td>{{ $notif->description }}</td>
-                                    <td>Active</td>
                                     <td>
                                         <div class="user-img">
                                             <img src="{{ asset($notif->image) }}" alt="no-image">
@@ -36,8 +34,20 @@
                                     </td>
                                     <td class="text-right">
                                         <div class="action-group">
+                                            {!! Form::open(['route' => 'send.notification', 'method' => 'POST']) !!}
+                                            <input type="hidden" name="notification_id" value="{{ $notif->id }}">
+                                            <button class="btn btn-sm btn-secondary" type="submit" title="Send Notification">
+                                                <i class="fas fa-arrow-right"></i>
+                                            </button>
+                                            {!! Form::close() !!}
+
                                             <a href="{{ route('notification.edit', $notif->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('notification.delete', $notif->id) }}" onclick="return confirm('Are you sure want to delete')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+
+                                            {!! Form::open(['route' => ['notification.delete', $notif->id], 'method' => 'DELETE']) !!}
+                                            <button class="btn btn-sm btn-danger" type="submit" onclick="deleteSubmit(this, event)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </td>
                                 </tr>

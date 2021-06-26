@@ -52,6 +52,8 @@ Route::group([
     $router->delete('/delete', [NotificationController::class, 'destroy']);
 });
 
+$router->post('/send-notification', [NotificationController::class, 'sendNotification']);
+
 Route::group([
     'middleware'=> 'api',
 ], function ($router) {

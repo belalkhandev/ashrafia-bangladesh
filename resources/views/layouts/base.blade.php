@@ -30,6 +30,7 @@
     {{--  Ajax Submitter  --}}
     <script src="{{ asset('assets/js/ajax-submitter.js') }}"></script>
     <script src="{{ asset('assets/vendors/sweetalert/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     @stack('footer-scripts')
 </body>
 

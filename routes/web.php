@@ -67,4 +67,7 @@ Route::group([
         $route->put('/edit/{notification_id}', [NotificationsController::class, 'update'])->name('notification.update');
         $route->delete('/delete/{notification_id}', [NotificationsController::class, 'destroy'])->name('notification.delete');
     });
+
+    //send notification
+    $route->post('/send-notification/', [NotificationsController::class, 'sendNotification'])->name('send.notification');
 });

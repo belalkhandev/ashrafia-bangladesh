@@ -97,3 +97,10 @@
 .profile-navbar ul li a:hover {
     color: #00d285;
 }
+
+.action-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-gap: 5px;
+}
