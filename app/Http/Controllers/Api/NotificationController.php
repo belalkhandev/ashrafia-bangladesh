@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Utility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 
 class NotificationController extends Controller
@@ -49,13 +50,23 @@ class NotificationController extends Controller
             ]);
         }
 
+        //set validation rules
         $rules = [
             'title' => 'required',
             'description' => 'required',
             'image' => 'mimes:jpg,jpeg,png,gif'
         ];
 
-        $this->validate($request, $rules);
+        //make validation
+        $validation = Validator::make($request->all(), $rules);
+
+        //check validation
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validation->errors()
+            ], 422);
+        }
 
         try {
 
@@ -69,6 +80,8 @@ class NotificationController extends Controller
 
                 $notification->image = $path;
             }
+
+            $notification->created_by = $this->guard()->user()->id;
 
             if ($notification->save()) {
                 return response()->json([
@@ -101,14 +114,24 @@ class NotificationController extends Controller
             ]);
         }
 
+        //set validation rules
         $rules = [
+            'notification_id' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'notification_id' => 'required',
             'image' => 'mimes:jpg,jpeg,png,gif'
         ];
 
-        $this->validate($request, $rules);
+        //make validation
+        $validation = Validator::make($request->all(), $rules);
+
+        //check validation
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validation->errors()
+            ], 422);
+        }
 
         try {
 
@@ -123,9 +146,13 @@ class NotificationController extends Controller
 
                 $notification->image = $path;
                 if ($old_image) {
+                    $base_url = URL::to('/').'/';
+                    $old_image = str_replace($base_url, '', $old_image);
                     unlink($old_image);
                 }
             }
+
+            $notification->updated_by = $this->guard()->user()->id;
 
             if ($notification->save()) {
                 return response()->json([
@@ -179,6 +206,8 @@ class NotificationController extends Controller
 
         if ($notif->delete()) {
             if($image) {
+                $base_url = URL::to('/').'/';
+                $image = str_replace($base_url, '', $image);
                 unlink($image);
             }
             return response()->json([
@@ -200,6 +229,22 @@ class NotificationController extends Controller
     // send notification
     public function sendNotification(Request $request)
     {
+        //set validation rules
+        $rules = [
+            'notification_id' => 'required',
+        ];
+
+        //make validation
+        $validation = Validator::make($request->all(), $rules);
+
+        //check validation
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validation->errors()
+            ], 422);
+        }
+        
         $notif = Notification::find($request->get('notification_id'));
         $tokens = User::whereNotNull('uuid')->pluck('uuid')->all();
 

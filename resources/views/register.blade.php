@@ -46,7 +46,7 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="form-group">
                         <label for="">Birthdate</label>
-                        <input type="date" name="birthdate" placeholder="YYYY-MM-DD" class="form-control datepicker">
+                        <input type="text" name="birthdate" placeholder="YYYY-MM-DD" class="form-control datepicker" autocomplete="off">
                         <span class="text-danger"></span>
                     </div>
                 </div>

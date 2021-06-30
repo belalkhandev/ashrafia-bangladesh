@@ -36,7 +36,7 @@
                                         <div class="action-group">
                                             {!! Form::open(['route' => 'send.notification', 'method' => 'POST']) !!}
                                             <input type="hidden" name="notification_id" value="{{ $notif->id }}">
-                                            <button class="btn btn-sm btn-secondary" type="submit" title="Send Notification">
+                                            <button class="btn btn-sm btn-secondary" type="submit" title="Send Notification" onclick="formSubmit(this, event)">
                                                 <i class="fas fa-arrow-right"></i>
                                             </button>
                                             {!! Form::close() !!}

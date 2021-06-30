@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 
 class AdminController extends Controller
 {
@@ -166,6 +167,8 @@ class AdminController extends Controller
                 $murid->photo = $photo_path;
 
                 if ($old_photo) {
+                    $base_url = URL::to('/').'/';
+                    $old_photo = str_replace($base_url, '', $old_photo);
                     unlink($old_photo);
                 }
             }
@@ -175,6 +178,8 @@ class AdminController extends Controller
                 $sign_path = Utility::fileUpload($request, 'signature', 'mureeds');
                 $murid->signature = $sign_path;
                 if ($old_sign) {
+                    $base_url = URL::to('/').'/';
+                    $old_sign = str_replace($base_url, '', $old_sign);
                     unlink($old_sign);
                 }
             }

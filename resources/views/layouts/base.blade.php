@@ -5,7 +5,9 @@
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Anjuman e Asharfia Bangladesh">
+    
     <!-- vendors -->
+    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/fontawesome/css/all.min.css') }}">
@@ -27,6 +29,7 @@
     <script src="{{ asset('assets/vendors/bootstrap/js/popper.min.j') }}s"></script>
     <script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/fontawesome/js/all.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     {{--  Ajax Submitter  --}}
     <script src="{{ asset('assets/js/ajax-submitter.js') }}"></script>
     <script src="{{ asset('assets/vendors/sweetalert/sweetalert2.min.js') }}"></script>

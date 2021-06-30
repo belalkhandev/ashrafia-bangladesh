@@ -174,7 +174,11 @@ class NotificationsController extends Controller
         $tokens = User::whereNotNull('uuid')->pluck('uuid')->all();
 
         if (!$tokens) {
-            return "No User Found";
+            return response()->json([
+                'type' => 'warning',
+                'title' => "Failed to send",
+                'message' => "No User Found"
+            ]);
         }
 
         $SERVER_API_KEY = 'AAAA19sbIac:APA91bEQSnvl-JuFFa1X86zVdvFLwFQo4r87rbCvXoBcWx3uv_X7XLZjO7F_2LZfCzHg42iofWX1Belo_Payjxe4iQP7FE7T56NCbFAT0XF-PJHz6Ye5jBm-mHvbksoT_JDSCdb4YhIC';
@@ -218,6 +222,9 @@ class NotificationsController extends Controller
                
         $response = curl_exec($ch);
 
-        return $response;
+        return response()->json([
+            'type' => 'success',
+            'title' => "Notification Send Successfully",
+        ]);
     }
 }

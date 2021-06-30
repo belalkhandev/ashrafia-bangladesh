@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Ui\Presets\React;
 
@@ -260,7 +261,7 @@ class UsersController extends Controller
             $user = Auth::guard()->user();     
 
             if ($user->is_active) {
-                $user->uuids = $request->input('uuids') ? $request->input('uuids') : null;
+                $user->uuid = $request->input('uuids') ? $request->input('uuid') : null;
                 $user->save();
                 
                 $token = $user->createToken($authorized)->accessToken;    
@@ -370,6 +371,8 @@ class UsersController extends Controller
                 $murid->photo = $photo_path;
 
                 if ($old_photo) {
+                    $base_url = URL::to('/').'/';
+                    $old_photo = str_replace($base_url, '', $old_photo);
                     unlink($old_photo);
                 }
             }
@@ -379,6 +382,8 @@ class UsersController extends Controller
                 $sign_path = Utility::fileUpload($request, 'signature', 'mureeds');
                 $murid->signature = $sign_path;
                 if ($old_sign) {
+                    $base_url = URL::to('/').'/';
+                    $old_sign = str_replace($base_url, '', $old_sign);
                     unlink($old_sign);
                 }
             }
