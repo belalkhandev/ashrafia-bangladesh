@@ -6,23 +6,23 @@
         <div class="col-lg-12">
             <div class="box">
                 <div class="box-header box-header-action">
-                    <h5 class="box-title">Mureeds</h5>
-                    <a href="{{ route('fr.register') }}" class="btn btn-primary">Add New</a>
+                    <h5 class="box-title">{{ __('lang.mureed') }}</h5>
+                    <a href="{{ route('fr.register') }}" class="btn btn-primary">{{ __('lang.add_new') }}</a>
                 </div>
                 <div class="box-body">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>SL</th>
-                                <th>User ID</th>
-                                <th>Photo</th>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                                <th>Profession</th>
-                                <th>Address</th>
-                                <th>Register Date</th>
-                                <th class="text-right">Action</th>
+                                <th>{{ __('lang.sl') }}</th>
+                                <th>{{ __('lang.user_id') }}</th>
+                                <th>{{ __('lang.photo') }}</th>
+                                <th>{{ __('lang.name') }}</th>
+                                <th>{{ __('lang.gender') }}</th>
+                                <th>{{ __('lang.age') }}</th>
+                                <th>{{ __('lang.profession') }}</th>
+                                <th>{{ __('lang.address') }}</th>
+                                <th>{{ __('lang.register_date') }}</th>
+                                <th class="text-right">{{ __('lang.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,7 +61,7 @@
                                 @endforeach
                             @else 
                             <tr>
-                                <td colspan="6">No Data Found</td>
+                                <td colspan="6">{{ __('lang.no_data') }}</td>
                             </tr>
                             @endif
                         </tbody>

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-section">
-                    <h2>Ashrafi Helpline</h2>
+                    <h2>{{ __('lang.ashrafi_helpline') }}</h2>
                 </div>
                 <div class="helpline-cards">
                     <div class="row">

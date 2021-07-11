@@ -7,31 +7,31 @@
                         <li>
                             <a href="{{ route('dashboard') }}">
                                 <i class="fas fa-tachometer-alt"></i>
-                                <span>Dashboard</span>
+                                <span>{{ __('lang.dashboard') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('mureed.list') }}">
                                 <i class="fas fa-users"></i>
-                                <span>Mureeds</span>
+                                <span>{{ __('lang.mureed') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('user.list') }}">
                                 <i class="fas fa-user-shield"></i>
-                                <span>Users</span>
+                                <span>{{ __('lang.user') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('notification.list') }}">
                                 <i class="far fa-bell"></i>
-                                <span>Notifications</span>
+                                <span>{{ __('lang.notification') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('user.profile', Auth::user()->id) }}">
                                 <i class="fas fa-user"></i>
-                                <span>My Profile ({{ Auth::user()->name }})</span>
+                                <span>{{ __('lang.my_profile') }} ({{ Auth::user()->name }})</span>
                             </a>
                         </li>
                         <li>

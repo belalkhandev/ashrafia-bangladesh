@@ -6,18 +6,18 @@
         <div class="col-lg-12">
             <div class="box">
                 <div class="box-header">
-                    <h5 class="box-title">Users</h5>
+                    <h5 class="box-title">{{ __('lang.user') }}</h5>
                 </div>
                 <div class="box-body">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>SL</th>
-                                <th>User ID</th>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th>Register Date</th>
-                                <th class="text-right">Action</th>
+                                <th>{{ __('lang.sl') }}</th>
+                                <th>{{ __('lang.user_id') }}</th>
+                                <th>{{ __('lang.name') }}</th>
+                                <th>{{ __('lang.role') }}</th>
+                                <th>{{ __('lang.register_date') }}</th>
+                                <th class="text-right">{{ __('lang.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +43,7 @@
                                 @endforeach
                             @else 
                             <tr>
-                                <td colspan="6">No Data Found</td>
+                                <td colspan="6">{{ __('lang.no_data') }}</td>
                             </tr>
                             @endif
                         </tbody>
