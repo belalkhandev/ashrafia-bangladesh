@@ -4,6 +4,7 @@
         "father_name" => "পিতা / স্বামীর নাম",
         "family_head" => "পরিবারের প্রধান",
         "birthdate" => "জন্ম তারিখ",
+        "age" => "বয়স",
         "blood_group" => "রক্তের গ্রুপ",
         "place" => "স্থান",
         "nid" => "এনআইডি",
@@ -30,5 +31,5 @@
         "account_security" => "অ্যাকাউন্ট নিরাপত্তা",
         "password" => "পাসওয়ার্ড",
         "confirm_password" => "কনফার্ম পাসওয়ার্ড",
-        "register_now" => "নিবন্ধন করুন",
+        "register_now" => "নিবন্ধন করুন",   
     ];

@@ -21,8 +21,9 @@
         <!-- login header -->
         <div class="login-header mb-30 pt-15">
             <div class="logo">
-                <h2>Anjuman-E-Ashrafia Bangladesh</h2>
-                <p>Log In to Your Account</p>
+                <img src="{{ asset('assets/images/app_logo.png') }}" alt="" width="90px">
+                <h3>{{ __('lang.logo_name') }}</h3>
+                <p>{{ __('lang.login_account') }}</p>
             </div>
         </div>
         <!-- login body -->
@@ -33,7 +34,7 @@
                         <span class="input-group-text">
                             <i class="fas fa-user"></i>
                         </span>
-                        <input type="text" name="username" placeholder="Username/Userid" class="form-control" value="{{ old('username') }}">
+                        <input type="text" name="username" placeholder="{{ __('lang.user_id') }}" class="form-control" value="{{ old('username') }}">
                     </div>
                     @error('username')
                         <span class="text-danger">{{ $message }}</span>
@@ -57,19 +58,19 @@
                             <span>Remember me</span>
                         </label>
                     </div>
-                    <div class="form-control-item">
+                    {{-- <div class="form-control-item">
                         <i class="fas fa-lock"></i>
                         <a href="#">Forgot Password?</a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="form-submit-control mt-30">
-                    <button class="btn btn-primary w-100" type="submit">Log In</button>
+                    <button class="btn btn-primary w-100" type="submit">{{ __('lang.login') }}</button>
                 </div>
             {!! Form::close() !!}
         </div>
         <!-- login footer -->
         <div class="login-footer text-center mt-25">
-            <p>Don't Have Any Account? <a href="{{ route('fr.register') }}">Register Now</a></p>
+            <p>{{ __('lang.no_account') }} <a href="{{ route('fr.register') }}">{{ __('reg.register_now') }}</a></p>
         </div>
     </div>
 </div>

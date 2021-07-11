@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Division;
 use App\Models\Upazila;
-use Database\Seeders\UpazilasTableSeeder;
 use Illuminate\Http\Request;
 
 class GeoLocationsController extends Controller

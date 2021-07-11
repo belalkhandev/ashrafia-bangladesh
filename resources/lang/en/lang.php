@@ -7,6 +7,8 @@
         "register" => "Register",
         "logout" => "Logout",
         "my_profile" => "My Profile",
+        "edit_profile" => "Edit Profile",
+        "profile" => "Profile",
         "user_profile" => "User Profile",
         "personal_information" => "Personal Information",
         "important_links" => "Important Links",
@@ -51,4 +53,8 @@
         "age" => "Age",
         "profession" => "Profession",
         "add_new" => "Add New",
+        "login_account" => "Log In to Your Account",
+        "no_account" => "Don't Have Any Account? ",
+        "image" => "Image",
+        "description" => "Description",
     ];

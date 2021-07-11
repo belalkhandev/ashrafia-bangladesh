@@ -6,21 +6,21 @@
         <div class="col-lg-12">
             <div class="box">
                 <div class="box-header box-header-action">
-                    <h5 class="box-title">Notifications</h5>
+                    <h5 class="box-title">{{ __('lang.notification') }}</h5>
                     @if(Auth::user()->hasRoles(['super_admin', 'admin']))
-                    <a href="{{ route('notification.create') }}" class="btn btn-primary">Add Notification</a>
+                    <a href="{{ route('notification.create') }}" class="btn btn-primary">{{ __('lang.add_new') }}</a>
                     @endif
                 </div>
                 <div class="box-body">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>SL</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Image</th>
+                                <th>{{ __('lang.sl') }}</th>
+                                <th>{{ __('lang.title') }}</th>
+                                <th>{{ __('lang.description') }}</th>
+                                <th>{{ __('lang.image') }}</th>
                                 @if(Auth::user()->hasRoles(['super_admin', 'admin']))
-                                <th class="text-right">Action</th>
+                                <th class="text-right">{{ __('lang.action') }}</th>
                                 @endif
                             </tr>
                         </thead>

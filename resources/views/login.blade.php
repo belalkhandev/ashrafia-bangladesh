@@ -8,7 +8,7 @@
                 <div class="col-md-4 offset-4">
                     <div class="login-wrap">
                         <div class="login-header text-center">
-                            <h2>Login</h2>
+                            <h2>{{ __('lang.login') }}</h2>
                         </div>
                         <div class="login-body">
                             {!! Form::open(['route' => 'login', 'method' => 'POST']) !!}

@@ -5,7 +5,7 @@
     @if($user->mureed)
     <div class="box">
         <div class="box-header">
-            <h5 class="box-title">User Profile</h5>
+            <h5 class="box-title">{{ __('lang.user_profile') }}</h5>
         </div>
         <div class="box-body">
             <div class="row">
@@ -25,59 +25,59 @@
                             <i class="fas fa-globe"></i>
                             <span>{{ $user->mureed->website }}</span>
                         </p>
-                        <a href="{{ route('user.profile.edit', $user->id) }}" class="btn btn-sm btn-secondary w-100">Edit Profile</a>
+                        <a href="{{ route('user.profile.edit', $user->id) }}" class="btn btn-sm btn-secondary w-100">{{ __('lang.edit_profile') }}</a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="user-profile">
-                        <h5 class="profile-section-title">Personal Information</h5>
+                        <h5 class="profile-section-title">{{ __('lang.personal_information') }}</h5>
                         <table class="table profile-table">
                             <tr>
-                                <th>Name</th>
+                                <th>{{ __('lang.name') }}</th>
                                 <td>{{ $user->mureed->name }}</td>
                             </tr>
                             <tr>
-                                <th>Father/Husband Name</th>
+                                <th>{{ __('reg.father_name') }}</th>
                                 <td>{{ $user->mureed->father_name }}</td>
                             </tr>
                             <tr>
-                                <th>Head-of-Family</th>
+                                <th>{{ __('reg.family_head') }}</th>
                                 <td>{{ $user->mureed->head_of_family }}</td>
                             </tr>
                             <tr>
-                                <th>Gender</th>
+                                <th>{{ __('lang.gender') }}</th>
                                 <td>{{ Str::ucfirst($user->mureed->gender) }}</td>
                             </tr>
                             <tr>
-                                <th>Birthdate</th>
+                                <th>{{ __('reg.birthdate') }}</th>
                                 <td>{{ user_formatted_date($user->mureed->birthdate) }}</td>
                             </tr>
                             <tr>
-                                <th>Age</th>
+                                <th>{{ __('reg.age') }}</th>
                                 <td>{{ $user->mureed->age }}</td>
                             </tr>
                             <tr>
-                                <th>Blood Group</th>
+                                <th>{{ __('reg.blood_group') }}</th>
                                 <td>{{ $user->mureed->blood_group }}</td>
                             </tr>
                             <tr>
-                                <th>Place</th>
+                                <th>{{ __('reg.place') }}</th>
                                 <td>{{ $user->mureed->place }}</td>
                             </tr>
                             <tr>
-                                <th>NID</th>
+                                <th>{{ __('reg.nid') }}</th>
                                 <td>{{ $user->mureed->nid }}</td>
                             </tr>
                             <tr>
-                                <th>Nationality</th>
+                                <th>{{ __('reg.nationality') }}</th>
                                 <td>{{ $user->mureed->nationality }}</td>
                             </tr>
                             <tr>
-                                <th>Profession</th>
+                                <th>{{ __('reg.profession') }}</th>
                                 <td>{{ $user->mureed->profession }}</td>
                             </tr>
                             <tr>
-                                <th>Disciple/Mureed of</th>
+                                <th>{{ __('reg.desciple') }}</th>
                                 <td>{{ $user->mureed->disciple_of }}</td>
                             </tr>
                         </table>
@@ -85,31 +85,31 @@
                         <h5 class="profile-section-title">Contact & Address</h5>
                         <table class="table profile-table">
                             <tr>
-                                <th>Division</th>
+                                <th>{{ __('reg.division') }}</th>
                                 <td>{{ $user->mureed->division->name }}</td>
                             </tr>
                             <tr>
-                                <th>District</th>
+                                <th>{{ __('reg.district') }}</th>
                                 <td>{{ $user->mureed->district->name }}</td>
                             </tr>
                             <tr>
-                                <th>Upazila</th>
+                                <th>{{ __('reg.upazila') }}</th>
                                 <td>{{ $user->mureed->upazila ? $user->mureed->upazila->name : "-" }}</td>
                             </tr>
                             <tr>
-                                <th>Home Address</th>
+                                <th>{{ __('reg.home_address') }}</th>
                                 <td>{{ $user->mureed->home_address }}</td>
                             </tr>
                             <tr>
-                                <th>Phone</th>
+                                <th>{{ __('reg.mobile_no') }}</th>
                                 <td>{{ user_formatted_date($user->mureed->mobile) }}</td>
                             </tr>
                             <tr>
-                                <th>Telephone</th>
+                                <th>{{ __('reg.telephone_home') }}</th>
                                 <td>{{ $user->mureed->telephone_home }}</td>
                             </tr>                            
                             <tr>
-                                <th>Facebook ID</th>
+                                <th>{{ __('reg.facebook_id') }}</th>
                                 <td>{{ $user->mureed->fax }}</td>
                             </tr>
                         </table>
@@ -117,11 +117,11 @@
                         <h5 class="profile-section-title">Office Information</h5>
                         <table class="table profile-table">
                             <tr>
-                                <th>Address</th>
+                                <th>{{ __('reg.office_address') }}</th>
                                 <td>{{ $user->mureed->office_address }}</td>
                             </tr>
                             <tr>
-                                <th>Telephone</th>
+                                <th>{{ __('reg.telephone_office') }}</th>
                                 <td>{{ $user->mureed->district->name }}</td>
                             </tr>
                         </table>
@@ -129,24 +129,24 @@
                         <h5 class="profile-section-title">Emergency Contact</h5>
                         <table>
                             <tr>
-                                <th>Emergency Contact</th>
+                                <th>{{ __('reg.emergency_contact') }}</th>
                                 <td>{{ $user->mureed->emergency_contact }}</td>
                             </tr>
                             <tr>
-                                <th>Emergency Telephone</th>
+                                <th>{{ __('reg.emergency_telephone') }}</th>
                                 <td>{{ $user->mureed->emergency_telephone }}</td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h5 class="profile-section-title">Profile Action</h5>
+                    <h5 class="profile-section-title">{{ __('lang.profile') }} {{ __('lang.action') }}</h5>
                     <div class="profile-navbar">
                         <ul>
                             <li>
                                 <a href="{{ route('user.profile.edit', $user->id) }}">
                                     <i class="fas fa-user"></i>
-                                    <span>Edit Profile</span>
+                                    <span>{{ __('lang.edit_profile') }}</span>
                                 </a>
                             </li>
                             @if(Auth::user()->id === $user->id)
@@ -194,7 +194,7 @@
 
     <div class="box">
         <div class="box-header">
-            <h5 class="box-title">User Profile</h5>
+            <h5 class="box-title">{{ __('lang.user_profile') }}</h5>
         </div>
         <div class="box-body">
             <div class="row">
@@ -205,7 +205,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="user-profile">
-                        <h5 class="profile-section-title">Personal Information</h5>
+                        <h5 class="profile-section-title">{{ __('lang.personal_information') }}</h5>
                         <table class="table profile-table">
                             <tr>
                                 <th>Name</th>
@@ -223,7 +223,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h5 class="profile-section-title">Profile Action</h5>
+                    <h5 class="profile-section-title">{{ __('lang.profile') }} {{ __('lang.action') }}</h5>
                     <div class="profile-navbar">
                         <ul>
                             @if(Auth::user()->id === $user->id)
