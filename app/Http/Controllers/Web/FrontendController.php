@@ -16,6 +16,28 @@ class FrontendController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return view('index')->with(array_merge($this->data, $data));
+        return view('index')->with($data);
+    }
+
+    public function information()
+    {
+        $data = [];
+
+        if(Auth::user() && Auth::user()->hasRoles(['super_admin', 'admin'])) {
+            return redirect()->route('dashboard');
+        }
+
+        return view('information')->with($data);
+    }
+
+    public function contact()
+    {
+        $data = [];
+
+        if(Auth::user() && Auth::user()->hasRoles(['super_admin', 'admin'])) {
+            return redirect()->route('dashboard');
+        }
+
+        return view('contact')->with($data);
     }
 }

@@ -165,8 +165,8 @@
 
                 <div class="col-md-6 col-lg-4">
                     <div class="form-group">
-                        <label for="">Fax</label>
-                        <input type="text" name="fax" placeholder="Fax" class="form-control">
+                        <label for="">Facebook ID</label>
+                        <input type="text" name="fax" placeholder="facebook id" class="form-control">
                         <span class="text-danger"></span>
                     </div>
                 </div>

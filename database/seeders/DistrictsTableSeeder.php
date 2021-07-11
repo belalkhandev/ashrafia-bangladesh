@@ -27,7 +27,7 @@ class DistrictsTableSeeder extends Seeder
             $dist->name = $district['name'];
             $dist->bn_name = $district['bn_name'];
             $dist->lat = $district['lat'];
-            $dist->long = $district['long'];
+            $dist->lon = $district['lon'];
             $dist->save();
         }
     }

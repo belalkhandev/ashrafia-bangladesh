@@ -19,6 +19,7 @@ class CreateDivisionsTable extends Migration
             $table->string('bn_name')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

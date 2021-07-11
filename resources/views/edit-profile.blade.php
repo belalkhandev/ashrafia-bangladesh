@@ -165,8 +165,8 @@
 
                 <div class="col-md-6 col-lg-4">
                     <div class="form-group">
-                        <label for="">Fax</label>
-                        <input type="text" name="fax" placeholder="Fax" class="form-control"  value="{{ $mureed->fax }}">
+                        <label for="">Facebook ID</label>
+                        <input type="text" name="fax" placeholder="Facebook ID" class="form-control"  value="{{ $mureed->fax }}">
                         <span class="text-danger"></span>
                     </div>
                 </div>

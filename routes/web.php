@@ -25,7 +25,8 @@ Route::post('login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('logout',  [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', [FrontendController::class, 'index'])->name('fr.home');
-Route::get('/information', [FrontendController::class, 'index'])->name('fr.information');
+Route::get('/information', [FrontendController::class, 'information'])->name('fr.information');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('fr.contact');
 Route::get('/register', [UsersController::class, 'register'])->name('fr.register');
 Route::post('/register', [UsersController::class, 'store'])->name('fr.register.store');
 

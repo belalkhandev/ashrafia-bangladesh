@@ -107,6 +107,10 @@
                             <tr>
                                 <th>Telephone</th>
                                 <td>{{ $user->mureed->telephone_home }}</td>
+                            </tr>                            
+                            <tr>
+                                <th>Facebook ID</th>
+                                <td>{{ $user->mureed->fax }}</td>
                             </tr>
                         </table>
 
@@ -119,10 +123,6 @@
                             <tr>
                                 <th>Telephone</th>
                                 <td>{{ $user->mureed->district->name }}</td>
-                            </tr>
-                            <tr>
-                                <th>Fax</th>
-                                <td>{{ $user->mureed->fax }}</td>
                             </tr>
                         </table>
 

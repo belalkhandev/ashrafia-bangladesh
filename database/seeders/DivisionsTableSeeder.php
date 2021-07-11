@@ -25,8 +25,7 @@ class DivisionsTableSeeder extends Seeder
             $div = new Division();
             $div->name = $division['name'];
             $div->bn_name = $division['bn_name'];
-            $div->lat = $division['lat'];
-            $div->long = $division['long'];
+            $div->url = $division['url'];
             $div->save();
         }
     }

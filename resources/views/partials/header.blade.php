@@ -14,8 +14,7 @@
                     <ul>
                         @if(!Auth::user())
                             <li><a href="{{ route('fr.home') }}">Home</a></li>
-                            <li><a href="">About Us</a></li>
-                            <li><a href="">Contact Us</a></li>
+                            <li><a href="{{ route('fr.contact') }}">Contact Us</a></li>
                             <li class="auth-link login-link"><a href="{{ route('login') }}">Login</a></li>
                             <li class="auth-link register-link"><a href="{{ route('fr.register') }}">Register</a></li>
                         @else

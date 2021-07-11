@@ -5,6 +5,8 @@
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Anjuman e Asharfia Bangladesh">
+
+    <title>Anjuman-e-Ashrafia Bangladesh</title>
     
     <!-- vendors -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
