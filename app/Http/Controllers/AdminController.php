@@ -11,9 +11,11 @@ use App\Models\User;
 use App\Models\Utility;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -88,6 +90,33 @@ class AdminController extends Controller
         ];
 
         return view('edit-profile')->with($data);
+    }
+
+    public function profileDownload($id)
+    {
+        if (Auth::user() && (Auth::user()->id == $id || Auth::user()->hasRoles(['super_admin', 'admin']))) {
+            //can access
+        } else {
+            abort(403, 'Access Denied');
+        }
+
+        $mureed = Mureed::where('user_id', $id)->first();
+
+        if (!$mureed) {
+            abort(404, 'Page not found');
+        }
+
+        $data = [
+            'divisions' => Division::get(),
+            'districts' => District::where('division_id', $mureed->division_id)->get(),
+            'upazilas' => Upazila::where('district_id', $mureed->district_id)->get(),
+            'mureed' => $mureed
+        ];
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf = $pdf->loadView('pdf-profile', $data);
+
+        return $pdf->stream('pdf-profile.blade');
     }
 
     public function profileUpdate(Request $request, $id)

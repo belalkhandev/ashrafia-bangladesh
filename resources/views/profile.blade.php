@@ -26,6 +26,7 @@
                             <span>{{ $user->mureed->website }}</span>
                         </p>
                         <a href="{{ route('user.profile.edit', $user->id) }}" class="btn btn-sm btn-secondary w-100">{{ __('lang.edit_profile') }}</a>
+                        <a href="{{ route('user.profile.download', $user->id) }}" class="btn btn-sm btn-info w-100" target="_blank">Download Profile</a>
                     </div>
                 </div>
                 <div class="col-md-6">
