@@ -26,7 +26,7 @@ h1 {
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 h3 {
@@ -34,15 +34,15 @@ h3 {
 }
 
 h4 {
-  font-size: 18px;
-}
-
-h5 {
   font-size: 16px;
 }
 
-h6 {
+h5 {
   font-size: 14px;
+}
+
+h6 {
+  font-size: 12px;
 }
 
 a {
@@ -338,7 +338,7 @@ table.table-hover tbody tr, .table.table-hover tbody tr {
 
 .header .logo a h2 {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .header .logo a img{

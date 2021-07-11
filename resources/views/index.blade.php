@@ -14,31 +14,31 @@
                             <li class="mb-15">
                                 <a href="https://youtube.com/c/IZHARCHANNEL" class="btn btn-outline-danger">
                                     <i class="fab fa-youtube"></i>
-                                    Youtube Channel
+                                    <span class="ml-10">{{ __('lang.youtube_cannel') }}</span>
                                 </a>
                             </li>
                             <li class="mb-15">
                                 <a href="https://www.facebook.com/izharchannel/" class="btn btn-outline-primary">
-                                    <i class="fab fa-facebook"></i>
-                                    {{ __('lang.facebook') }} {{ __('lang.page') }}
+                                    <i class="fab fa-facebook-square"></i>
+                                    <span class="ml-10">{{ __('lang.facebook') }} {{ __('lang.page') }}</span>
                                 </a>
                             </li>
                             <li class="mb-15">
                                 <a href="https://www.facebook.com/groups/huzoorquaidemillat/" class="btn btn-outline-primary">
-                                    <i class="fab fa-facebook"></i>
-                                    {{ __('lang.facebook') }} {{ __('lang.group') }}
+                                    <i class="fab fa-facebook-square"></i>
+                                    <span class="ml-10">{{ __('lang.facebook') }} {{ __('lang.group') }}</span>
                                 </a>
                             </li>
                             <li class="mb-15">
                                 <a href="{{ asset('files/importance-of-bayat.pdf') }}" target="_blank" class="btn btn-outline-success">
                                     <i class="fas fa-book-reader"></i>
-                                    Importance of Taking Bayat
+                                    <span class="ml-10">{{ __('lang.importance_bayat') }}</span>
                                 </a>
                             </li>
                             <li class="mb-15">
                                 <a href="{{ asset('files/biography-of-huzoor-quied-e-millat.pdf') }}" target="_blank" class="btn btn-outline-success">
                                     <i class="fas fa-book-reader"></i>
-                                    Biography of Huzoor Quied-e-Millat
+                                    <span class="ml-10">{{ __('lang.huzoor_bio') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -75,8 +75,8 @@
                                         <h2>{{ __('lang.madrasha') }}</h2>
                                     </div>
                                     <div class="page-content">
-                                        <h4>Al Jamiyatul Ashrafia Izharul Uloom.</h4>
-                                        <p>Sharkar Market,Ashuliya,Dhaka</p>
+                                        <h4>{{ __('lang.madrasha_name') }}</h4>
+                                        <p>{{ __('lang.madrasha_address') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -88,10 +88,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="page-section">
-                                        <h2>Central Khankah</h2>
+                                        <h2>{{ __('lang.central_khankah') }}</h2>
                                     </div>
                                     <div class="page-content">
-                                        <p>Khankah -e- Ashrafia Hasania Sarker-e- Kalan. Eskaton Gallary-01, 14 N0. New Eskaton Road, Adjacent to Mina Bazar, Ramna, Dhaka-1000, Bangladesh.</p>
+                                        <p>{{ __('lang.central_khankah_address') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-section">
-                        <h2>Ashrafi Helpline</h2>
+                        <h2>{{ __('lang.ashrafi_helpline') }}</h2>
                     </div>
                     <div class="helpline-cards">
                         <div class="row">
@@ -175,7 +175,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-section">
-                        <h2>Donate Us</h2>
+                        <h2>{{ __('lang.donate') }}</h2>
                     </div>
                 </div>
                 <div class="donation-card">
@@ -186,12 +186,11 @@
                     </p>
                     <p>
                         <i class="fas fa-university"></i>
-                        Pubali Bank Ltd.
+                        {{ __('lang.bank') }}
                     </p>
                     <p>
                         <i class="fas fa-map-marker-alt"></i>
-                        Magbazar Branch.
-                        Dhaka-1000. Bangladesh.
+                        {{ __('lang.bank_address') }}
                     </p>
                 </div>
             </div>

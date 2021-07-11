@@ -7,21 +7,21 @@
                         <li>
                             <a href="{{ route('fr.home') }}">
                                 <i class="fas fa-home"></i>
-                                <span>Home</span>
+                                <span>{{ __('lang.home') }}</span>
                             </a>
                         </li>
                         @if(Auth::user())                        
                             <li>
                                 <a href="{{ route('notification.list') }}">
                                     <i class="far fa-bell"></i>
-                                    <span>Notifications</span>
+                                    <span>{{ __('lang.notification') }}</span>
                                 </a>
                             </li>
                             
                             <li>
                                 <a href="{{ route('user.profile', Auth::user()->id) }}">
                                     <i class="fas fa-user"></i>
-                                    <span>My Profile ({{ Auth::user()->name }})</span>
+                                    <span>{{ __('lang.my_profile') }} ({{ Auth::user()->name }})</span>
                                 </a>
                             </li>
                         @endif                                            
