@@ -341,6 +341,11 @@ table.table-hover tbody tr, .table.table-hover tbody tr {
   font-size: 20px;
 }
 
+.header .logo a img{
+  width: 100px;
+  margin-bottom: 10px;
+}
+
 .mainmenu ul {
   text-align: right;
   display: flex;
@@ -407,6 +412,10 @@ table.table-hover tbody tr, .table.table-hover tbody tr {
   background-color: #00d285;
   margin-bottom: -10px;
   margin-top: 15px;
+}
+
+.dashboard-navigation .navbar {
+  justify-content: center !important;
 }
 
 .navbar ul {

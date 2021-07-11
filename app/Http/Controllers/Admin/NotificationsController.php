@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\User;
 use App\Models\Utility;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
 class NotificationsController extends Controller
@@ -22,6 +23,9 @@ class NotificationsController extends Controller
 
     public function create()
     {
+        if (!Auth::user()->hasRoles(['super_admin', 'admin'])) {
+            abort(403, 'Access Denied');
+        }
 
         $data = [
             'page_title' => 'Add new notification',
@@ -79,6 +83,9 @@ class NotificationsController extends Controller
 
     public function edit($id)
     {
+        if (!Auth::user()->hasRoles(['super_admin', 'admin'])) {
+            abort(403, 'Access Denied');
+        }
         $notificaition = Notification::find($id);
 
         $data = [
@@ -143,6 +150,9 @@ class NotificationsController extends Controller
 
     public function destroy(Notification $notification, $id)
     {
+        if (!Auth::user()->hasRoles(['super_admin', 'admin'])) {
+            abort(403, 'Access Denied');
+        }
         $notification = $notification->find($id);
         $notif_image = $notification->image;
 

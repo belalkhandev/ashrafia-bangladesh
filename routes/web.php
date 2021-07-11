@@ -29,6 +29,7 @@ Route::get('/information', [FrontendController::class, 'information'])->name('fr
 Route::get('/contact', [FrontendController::class, 'contact'])->name('fr.contact');
 Route::get('/register', [UsersController::class, 'register'])->name('fr.register');
 Route::post('/register', [UsersController::class, 'store'])->name('fr.register.store');
+Route::get('/locale/{locale}', [FrontendController::class, 'switchLang'])->name('fr.change.lang');
 
 
 /*

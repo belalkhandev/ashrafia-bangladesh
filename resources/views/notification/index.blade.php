@@ -7,7 +7,9 @@
             <div class="box">
                 <div class="box-header box-header-action">
                     <h5 class="box-title">Notifications</h5>
+                    @if(Auth::user()->hasRoles(['super_admin', 'admin']))
                     <a href="{{ route('notification.create') }}" class="btn btn-primary">Add Notification</a>
+                    @endif
                 </div>
                 <div class="box-body">
                     <table class="table table-hover">
@@ -17,7 +19,9 @@
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Image</th>
+                                @if(Auth::user()->hasRoles(['super_admin', 'admin']))
                                 <th class="text-right">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -32,6 +36,7 @@
                                             <img src="{{ asset($notif->image) }}" alt="no-image">
                                         </div>
                                     </td>
+                                    @if(Auth::user()->hasRoles(['super_admin', 'admin']))
                                     <td class="text-right">
                                         <div class="action-group">
                                             {!! Form::open(['route' => 'send.notification', 'method' => 'POST']) !!}
@@ -50,6 +55,7 @@
                                             {!! Form::close() !!}
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             @else 

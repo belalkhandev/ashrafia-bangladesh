@@ -34,6 +34,26 @@
                                 <span>My Profile ({{ Auth::user()->name }})</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('logout') }}">
+                                <i class="fas fa-sign-out-alt"></i>
+                                {{ __('lang.logout') }} ({{ Auth::user()->name }})
+                            </a>
+                        </li>
+                        @if (App()->getLocale() === 'en')
+                            <li>
+                                <a href="/locale/bn">
+                                    <i class="fas fa-language"></i>
+                                    <span>বাংলা</span>
+                                </a> 
+                            @else
+                            <li>
+                                <a href="/locale/en">
+                                    <i class="fas fa-language"></i>
+                                    <span>Eng</span>
+                                </a> 
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

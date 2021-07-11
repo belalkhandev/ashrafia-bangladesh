@@ -15,7 +15,7 @@ class NotificationController extends Controller
 {
     public function index()
     {
-        if (!$this->guard()->user()->hasRoles(['super_admin', 'admin'])) {
+        if (!$this->guard()->user()->hasRoles(['super_admin', 'admin', 'disciple'])) {
             return response()->json([
                 'status' => false,
                 'message' => 'Access denied'

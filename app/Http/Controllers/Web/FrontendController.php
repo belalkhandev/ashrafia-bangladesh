@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
@@ -39,5 +40,11 @@ class FrontendController extends Controller
         }
 
         return view('contact')->with($data);
+    }
+
+    public function switchLang($locale){
+        App::setLocale($locale);
+        session()->put('locale', $locale);
+        return redirect()->back();
     }
 }

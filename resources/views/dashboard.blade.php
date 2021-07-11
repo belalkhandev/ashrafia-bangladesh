@@ -114,7 +114,24 @@
                 <div class="box-header">
                     <h5 class="box-title">Notifications</h5>
                 </div>
-                <div class="box-body"></div>
+                <div class="box-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($notifications as $notification)
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('notification.list') }}">{{ $notification->title }}</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 <div class="box-footer"></div>
             </div>
         </div>
