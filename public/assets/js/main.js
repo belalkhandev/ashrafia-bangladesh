@@ -12,6 +12,14 @@
             });
         }
 
+        //responsive menu
+        const menus = $('.navbar').html();
+        $('.responsive-menu').append(menus);
+
+        $(document).on('click', '#rs-menu-bar', function() {
+            $('.responsive-menu').toggleClass('show');
+        });
+
     });
 
 }(jQuery))

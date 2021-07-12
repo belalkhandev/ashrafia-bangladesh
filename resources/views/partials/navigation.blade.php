@@ -2,6 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
+                <div id="rs-menu-bar">
+                    <span>Menu</span>
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="responsive-menu"></div>
                 <div class="navbar">
                     <ul>
                         <li>

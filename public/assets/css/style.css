@@ -412,10 +412,17 @@ table.table-hover tbody tr, .table.table-hover tbody tr {
   background-color: #00d285;
   margin-bottom: -10px;
   margin-top: 15px;
+  position: relative;
 }
 
 .dashboard-navigation .navbar {
   justify-content: center !important;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-navigation .navbar {
+    display: none;
+  }
 }
 
 .navbar ul {
