@@ -61,6 +61,7 @@ Route::group([
     $route->put('/user/{id}/profile/edit', [AdminController::class, 'profileUpdate'])->name('user.profile.update');
     $route->delete('/user/{id}/delete', [AdminController::class, 'deleteUser'])->name('user.delete');
     $route->get('/user/{id}/profile/download', [AdminController::class, 'profileDownload'])->name('user.profile.download');
+    $route->get('/user/{id}/profile/print', [AdminController::class, 'printProfile'])->name('user.profile.print');
 
     $route->put('user/{id}/role/update', [AdminController::class, 'roleUpdate'])->name('user.role.update');
     $route->put('user/{id}/change/password', [AdminController::class, 'updatePassword'])->name('user.change.password');

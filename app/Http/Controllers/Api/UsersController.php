@@ -193,10 +193,6 @@ class UsersController extends Controller
 
                 $token = null;
 
-                if ($this->guard()->user()) {
-                    dd($this->guard()->user());
-                }
-
                 if(Auth::guard('api')->check()) {
                     return response()->json([
                         'status' => true,

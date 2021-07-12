@@ -26,7 +26,7 @@
         "emergency_telephone" => "জরুরী টেলিফোন",
         "email" => "ইমেল ঠিকানা",
         "website" => "ওয়েবসাইট",
-        "disciple" => "শিষ্য / মুরিড",
+        "disciple" => "শিষ্য / মুরিদ",
         "photo_upload" => "ফটো আপলোড",
         "account_security" => "অ্যাকাউন্ট নিরাপত্তা",
         "password" => "পাসওয়ার্ড",

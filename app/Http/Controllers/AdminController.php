@@ -119,6 +119,28 @@ class AdminController extends Controller
         return $pdf->stream('pdf-profile.blade');
     }
 
+
+    public function printProfile($id)
+    {
+        if (Auth::user() && (Auth::user()->id == $id || Auth::user()->hasRoles(['super_admin', 'admin']))) {
+            //can access
+        } else {
+            abort(403, 'Access Denied');
+        }
+
+        $user = User::with('mureed')->where('is_active', 1)->find($id);
+
+        if (!$user) {
+            abort(404, 'Data not found');
+        }
+
+        $data = [
+            'user' => $user
+        ];
+
+        return view('print-profile')->with($data);
+    }
+
     public function profileUpdate(Request $request, $id)
     {
         if (Auth::user() && (Auth::user()->id == $id || Auth::user()->hasRoles(['super_admin', 'admin']))) {

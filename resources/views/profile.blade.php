@@ -25,8 +25,8 @@
                             <i class="fas fa-globe"></i>
                             <span>{{ $user->mureed->website }}</span>
                         </p>
-                        <a href="{{ route('user.profile.edit', $user->id) }}" class="btn btn-sm btn-secondary w-100">{{ __('lang.edit_profile') }}</a>
-                        <a href="{{ route('user.profile.download', $user->id) }}" class="btn btn-sm btn-info w-100" target="_blank">Download Profile</a>
+                        <a href="{{ route('user.profile.edit', $user->id) }}" class="btn btn-secondary w-100">{{ __('lang.edit_profile') }}</a>
+                        <a href="{{ route('user.profile.print', $user->id) }}" class="btn btn-info w-100" target="_blank">{{ __('lang.print_profile') }}</a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -78,12 +78,12 @@
                                 <td>{{ $user->mureed->profession }}</td>
                             </tr>
                             <tr>
-                                <th>{{ __('reg.desciple') }}</th>
+                                <th>{{ __('reg.disciple') }}</th>
                                 <td>{{ $user->mureed->disciple_of }}</td>
                             </tr>
                         </table>
 
-                        <h5 class="profile-section-title">Contact & Address</h5>
+                        <h5 class="profile-section-title">{{ __('lang.contact_address') }}</h5>
                         <table class="table profile-table">
                             <tr>
                                 <th>{{ __('reg.division') }}</th>
@@ -115,7 +115,7 @@
                             </tr>
                         </table>
 
-                        <h5 class="profile-section-title">Office Information</h5>
+                        <h5 class="profile-section-title">{{ __('lang.office_address') }}</h5>
                         <table class="table profile-table">
                             <tr>
                                 <th>{{ __('reg.office_address') }}</th>
@@ -127,7 +127,7 @@
                             </tr>
                         </table>
 
-                        <h5 class="profile-section-title">Emergency Contact</h5>
+                        <h5 class="profile-section-title">{{ __('lang.emergency_contact') }}</h5>
                         <table>
                             <tr>
                                 <th>{{ __('reg.emergency_contact') }}</th>
@@ -154,7 +154,7 @@
                             <li>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                     <i class="fas fa-key"></i>
-                                    <span>Change Password</span>
+                                    <span>{{ __('lang.change_password') }}</span>
                                 </a>
                             </li>
                             @endif
@@ -162,13 +162,13 @@
                             <li>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
                                     <i class="fas fa-key"></i>
-                                    <span>Reset Password</span>
+                                    <span>{{ __('lang.reset_password') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#changeRoleModal">
                                     <i class="fas fa-cog"></i>
-                                    <span>Change Role ({{ $user->role()->display_name }})</span>
+                                    <span>{{ __('lang.change_role') }} ({{ $user->role()->display_name }})</span>
                                 </a>
                             </li>
                             @endif
@@ -177,7 +177,7 @@
                                 {!! Form::open(['route' => ['user.delete', $user->id], 'method' => 'DELETE']) !!}
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="deleteSubmit(this, event)">
                                     <i class="fas fa-trash"></i>
-                                    <span>Delete Account</span>
+                                    <span>{{ __('lang.delete_account') }}</span>
                                 </button>
                                 {!! Form::close() !!}
                             </li>
@@ -209,15 +209,15 @@
                         <h5 class="profile-section-title">{{ __('lang.personal_information') }}</h5>
                         <table class="table profile-table">
                             <tr>
-                                <th>Name</th>
+                                <th>{{ __('lang.name') }}</th>
                                 <td>{{ $user->name }}</td>
                             </tr>
                             <tr>
-                                <th>Username</th>
+                                <th>{{ __('lang.username') }}</th>
                                 <td>{{ $user->username }}</td>
                             </tr>
                             <tr>
-                                <th>Email</th>
+                                <th>{{ __('lang.email') }}</th>
                                 <td>{{ $user->email }}</td>
                             </tr>
                         </table>
@@ -231,7 +231,7 @@
                             <li>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                     <i class="fas fa-key"></i>
-                                    <span>Change Password</span>
+                                    <span>{{ __('lang.change_password') }}</span>
                                 </a>
                             </li>
                             @endif
@@ -239,13 +239,13 @@
                             <li>
                                 <a href="">
                                     <i class="fas fa-key"></i>
-                                    <span>Reset Password</span>
+                                    <span>{{ __('lang.reset_password') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <i class="fas fa-cog"></i>
-                                    <span>Change Role ({{ $user->role()->display_name }})</span>
+                                    <span>{{ __('lang.change_role') }} ({{ $user->role()->display_name }})</span>
                                 </a>
                             </li>
                             @endif
@@ -254,7 +254,7 @@
                                 {!! Form::open(['route', ['user.delete', $user->id], 'method' => 'DELETE']) !!}
                                 <button type="submit" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
-                                    <span>Delete Account</span>
+                                    <span>{{ __('lang.delete_account') }}</span>
                                 </button>
                                 {!! Form::close() !!}
                             </li>
@@ -275,7 +275,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('lang.change_password') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 {!! Form::open(['route' => ['user.change.password', $user->id], 'method' => 'PUT']) !!}
@@ -286,18 +286,18 @@
                             <span class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label for="">New Password</label>
+                            <label for="">{{ __('reg.password') }}</label>
                             <input type="password" name="password" placeholder="********" class="form-control">
                             <span class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label for="">Confirm Password</label>
+                            <label for="">{{ __('reg.confirm_password') }}</label>
                             <input type="password" name="password_confirmation" placeholder="********" class="form-control">
                             <span class="text-danger"></span>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">Reset Password</button>
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">{{ __('lang.reset_password') }}</button>
                     </div>
                 {!! Form::close() !!}
             </div>
@@ -309,24 +309,24 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ __('lang.reset_password') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     {!! Form::open(['route' => ['user.reset.password', $user->id], 'method' => 'PUT']) !!}
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">New Password</label>
+                            <label for="">{{ __('reg.password') }}</label>
                             <input type="password" name="password" placeholder="********" class="form-control">
                             <span class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label for="">Confirm Password</label>
+                            <label for="">{{ __('reg.confirm_password') }}</label>
                             <input type="password" name="password_confirmation" placeholder="********" class="form-control">
                             <span class="text-danger"></span>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">Reset Password</button>
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">{{ __('lang.reset_password') }}</button>
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -348,7 +348,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">Change Role</button>
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="formSubmit(this, event)">{{ __('lang.change_role') }}</button>
                     </div>
                     {!! Form::close() !!}
                 </div>
